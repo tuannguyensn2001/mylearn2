@@ -1,3 +1,8 @@
+
+
+
+
+
 @extends('Admin.layouts.cssjs')
 @section('title')
     Đăng nhập
@@ -5,7 +10,7 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{route('admin')}}"><b>Đăng nhập Admin</a>
+            <a href="{{route('admin')}}"><b>Đăng nhập Admin</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -16,7 +21,7 @@
                     @csrf
 
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email" name="email">
+                        <input type="text" class="form-control" placeholder="Email" name="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

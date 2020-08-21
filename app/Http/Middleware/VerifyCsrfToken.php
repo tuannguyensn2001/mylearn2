@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        '/admin/danh-sach-nguoi-dung/thay-doi-khoa-hoc'
     ];
 }

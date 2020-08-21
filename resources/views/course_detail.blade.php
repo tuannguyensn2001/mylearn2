@@ -100,10 +100,10 @@
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <div class="tabs d-flex flex-row align-items-center justify-content-start">
-                                            <div class="tab active">description</div>
-                                            <div class="tab">curriculum</div>
-                                            <div class="tab">reviews</div>
-                                            <div class="tab">members</div>
+                                            <div class="tab active">Giới thiệu</div>
+                                            <div class="tab">Dàn bài</div>
+                                            <div class="tab">đánh giá</div>
+                                            <div class="tab">thành viên</div>
                                         </div>
                                     </div>
                                 </div>
@@ -280,12 +280,12 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title this-title" id="exampleModalLabel">Modal title</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body" id="yt-player">
+                                    <div class="modal-body this-body" id="yt-player">
 
                                     </div>
 
@@ -602,15 +602,25 @@
                 });
                 let url=$(this).attr('href');
                 let element=$(this);
+                let course_id={{$course->id}}
                 $.ajax({
                     url: url,
                     type: 'get',
+                    data:{
+                        course_id
+                    },
                     success: function (data) {
-                        $('.modal-body').empty();
+                        console.log(data);
+                        $('.this-body').empty();
                         let name=element.closest('.cur_item_content').children('.cur_item_title').html();
-                        $('.modal-title').html(name);
+                        $('.this-title').html(name);
                         let video='<iframe width="100%" height="700" src="https://www.youtube.com/embed/'+data+'" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                        $('.modal-body').append(video);
+                        $('.this-body').append(video);
+                    },
+                    error:data=>{
+
+                      if (data['status']==403) window.location.href = '{{route('login')}}';
+                        else if(data['status']==401) $(".this-body").append('<div class="alert alert-danger" role="alert"> Bạn vui lòng đăng ký khóa học này !</div>');
                     }
                 })
             })
