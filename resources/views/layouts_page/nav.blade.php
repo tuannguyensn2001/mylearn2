@@ -1,3 +1,4 @@
+
 <header class="header">
 
     <!-- Top Bar -->
@@ -57,12 +58,11 @@
                         </div>
                         <nav class="main_nav_contaner">
                             <ul class="main_nav">
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="#">Events</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="active"><a href="/">Trang chủ</a></li>
+                                <li><a href="/danh-sach-khoa-hoc">Khóa học</a></li>
+
+                                <li><a href="/danh-sach-bai-viet">Blog</a></li>
+                                <li><a href="contact.html">Liên hệ</a></li>
                             </ul>
                         </nav>
                         <div class="header_content_right ml-auto text-right">
@@ -118,7 +118,7 @@
         <div class="modal-dialog modal-lg   " role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -146,9 +146,9 @@
                                                         </div>
                                                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                             <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                                <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                                                                <p class="mb-0">@johnny.s</p>
-                                                                <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                                                <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap name">John Smith</h4>
+
+
 
                                                                 <div class="mt-2 custom-file">
                                                                     <input type="text" hidden name="id" class="profile-id">
@@ -156,8 +156,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="text-center text-sm-right">
-                                                                <span class="badge badge-secondary">administrator</span>
-                                                                <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                                                                <span class="badge badge-secondary">Thành viên</span>
+                                                                <div class="text-muted profile-created"><small></small></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -165,6 +165,7 @@
                                                         <li class="nav-item item-1 underlined"><a href="" class="active nav-link focus option" data-text="1">Thông tin cá nhân</a></li>
 
                                                         <li class="nav-item item-2"><a href="" class="active nav-link option " data-text="2">Đổi mật khẩu</a></li>
+                                                        <li class="nav-item item-3"><a href="" class="active nav-link option " data-text="3">Khóa học của tôi</a></li>
                                                     </ul>
                                                     <div class="tab-content pt-3 menu-1 appear">
                                                         <div class="tab-pane active ">
@@ -251,6 +252,22 @@
                                                                     <button class="btn btn-primary" type="submit">Save Changes</button>
                                                                 </div>
                                                             </div>
+
+
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-content pt-3 menu-3 ">
+                                                        <div class="tab-pane active ">
+                                                        <table class="auth-course" width="100%">
+
+
+                                                                </table>
+
 
 
 

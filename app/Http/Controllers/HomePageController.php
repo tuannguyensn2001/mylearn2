@@ -6,6 +6,8 @@ use App\Course;
 use App\Instructor;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -16,12 +18,13 @@ class HomePageController extends Controller
 
     public function __construct()
     {
-       $course=Course::query()
-           ->select(['courses.*','categories.name as category'])
-           ->leftJoin('categories','categories.id','=','courses.category_id')
-           ->OrderBy('id','desc')
-           ->where('courses.status_id','=','1')
-           ->take(3)
+        $course=Course::query()
+            ->select('courses.*','categories.name as category','categories.slug as cate_slug','count.count')
+            ->leftJoin('categories','categories.id','=','courses.category_id')
+            ->join(DB::raw('(SELECT COUNT(user_id) as count,course_id FROM usertocourse WHERE type=1 GROUP BY course_id) as count'),'count.course_id','=','courses.id')
+            ->OrderBy('count.count','desc')
+            ->where('courses.status_id','=',1)
+            ->take(3)
             ->get();
        $instructor=Instructor::all();
        View::share('instructor',$instructor);
@@ -77,11 +80,14 @@ class HomePageController extends Controller
             $user->username=$request->username;
             $user->email=$request->email;
             $user->password=bcrypt($request->password);
+            $user->avatar="upload/users/avatar/default.png";
             $user->status=1;
             $user->save();
             return redirect()->route('login');
         }
         return redirect()->back()->withErrors($validator);
     }
+
+
 
 }

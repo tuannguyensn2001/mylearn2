@@ -4,6 +4,19 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/course.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/course_responsive.css')}}" type="text/css">
+    <style>
+        .comment{
+            width: 100% !important;
+            margin-left: 20px;
+        }
+
+        .img img{
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -49,9 +62,9 @@
                 <div class="row">
                     <div class="col">
                         <ul class="breadcrumbs_list d-flex flex-row align-items-center justify-content-start">
-                            <li><a href="index.html">home</a></li>
-                            <li><a href="courses.html">courses</a></li>
-                            <li><a href="courses.html">{{$course->category}}</a></li>
+                            <li><a href="/">home</a></li>
+                            <li><a href="/danh-sach-khoa-hoc">courses</a></li>
+                            <li><a href="">{{$course->category}}</a></li>
                             <li>{{$course->name}}</li>
                         </ul>
                     </div>
@@ -112,81 +125,31 @@
 
                         <!-- Description -->
                         <div class="tab_panel description active">
-                            <div class="panel_title">About this course</div>
+                            <div class="panel_title">Mô tả khóa học</div>
                             <div class="panel_text">
-                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus. Suspendisse potenti. In rutrum justo et diam egestas luctus. Mauris eu neque eget odio suscipit eleifend. Sed imperdiet ante quis felis tempor hendrerit. Curabitur eget fermentum ipsum. Sed efficitur eget velit eu vulputate. Duis tincidunt quam in erat dignissim consequat. Praesent tempus leo eu nisl fringilla interdum. Maecenas rutrum libero eget lacus bibendum tristique. Curabitur at felis lobortis, mollis ante ut, tempus elit. Morbi justo nisi, posuere sed augue id, iaculis tincidunt mi. Pellentesque sed dolor sed dui congue tempus a et felis.</p>
+                                <p>{{$course->description}}</p>
                             </div>
 
                             <!-- Instructors -->
                             <div class="instructors">
-                                <div class="panel_title">All instructors</div>
+                                <div class="panel_title">Mentor khóa học</div>
                                 <div class="row instructors_row">
-
-                                    <!-- Instructor -->
+                                    @foreach($mentor as $index)
                                     <div class="col-lg-4 col-md-6">
                                         <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="{{asset('home/images/instructor_4.jpg')}}" alt=""></div></div>
+                                            <div class="instructor_image"><div><img src="{{asset($index->avatar)}}" alt=""></div></div>
                                             <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
+                                                <div class="instructor_name"><a href="instructors.html">{{$index->name}}</a></div>
                                                 <div class="instructor_title">Teacher</div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
 
-                                    <!-- Instructor -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="https://i.pinimg.com/originals/cb/c2/2c/cbc22ca5a3d7568a742262639a9f6b3f.jpg" alt=""></div></div>
-                                            <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-                                                <div class="instructor_title">Teacher</div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Instructor -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="{{asset('home/images/instructor_6.jpg')}}" alt=""></div></div>
-                                            <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-                                                <div class="instructor_title">Teacher</div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Instructor -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="images/instructor_7.jpg" alt=""></div></div>
-                                            <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-                                                <div class="instructor_title">Teacher</div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Instructor -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="images/instructor_8.jpg" alt=""></div></div>
-                                            <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-                                                <div class="instructor_title">Teacher</div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Instructor -->
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="images/instructor_9.jpg" alt=""></div></div>
-                                            <div class="instructor_content">
-                                                <div class="instructor_name"><a href="instructors.html">Sarah Parker</a></div>
-                                                <div class="instructor_title">Teacher</div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -234,10 +197,7 @@
 
                         <!-- Curriculum -->
                         <div class="tab_panel curriculum">
-                            <div class="panel_title">Syllabus</div>
-                            <div class="panel_text">
-                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus. Suspendisse potenti. In rutrum justo et diam egestas luctus. Mauris eu neque eget odio suscipit eleifend. Sed imperdiet ante quis felis tempor hendrerit. Curabitur eget fermentum ipsum. Sed efficitur eget velit eu vulputate. Duis tincidunt quam in erat dignissim consequat. Praesent tempus leo eu nisl fringilla interdum. Maecenas rutrum libero eget lacus bibendum tristique. Curabitur at felis lobortis, mollis ante ut, tempus elit. Morbi justo nisi, posuere sed augue id, iaculis tincidunt mi. Pellentesque sed dolor sed dui congue tempus a et felis.</p>
-                            </div>
+
                             <div class="curriculum_items">
                                 @foreach($lesson as $key=>$index)
                                     <div class="cur_item">
@@ -248,7 +208,7 @@
                                         <div class="cur_item_content">
                                             <div class="cur_item_title">{{$index->name}}</div>
                                             <div class="cur_item_text">
-                                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum.</p>
+                                                <p>{{$index->description}}</p>
                                             </div>
                                             <div class="cur_contents">
                                                 <ul>
@@ -263,10 +223,7 @@
 
                                                         </ul>
                                                     </li>
-                                                    <li class="d-flex flex-row align-items-center justify-content-start">
-                                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Graded: Cumulative Language Quiz</span>
-                                                        <div class="cur_time ml-auto"><span>3 Questions</span></div>
-                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -295,93 +252,47 @@
 
                         <!-- Reviews -->
                         <div class="tab_panel reviews">
-                            <div class="panel_title">Reviews</div>
-                            <div class="panel_text">
-                                <p>Lorem ipsum dolor sit amet, te eros consulatu pro, quem labores petentium no sea, atqui posidonium interpretaris pri eu. At soleat maiorum platonem vix, no mei case fierent. Primis quidam ancillae te mei.</p>
-                            </div>
-                            <div class="cur_ratings_container clearfix">
-                                <div class="cur_rating d-flex flex-column align-items-center justify-content-center">
-                                    <div class="cur_rating_num">4,5</div>
-                                    <div class="rating_r rating_r_4 cur_stars"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="cur_rating_text">Rated 5 out of 3 Ratings</div>
-                                </div>
-                                <div class="cur_rating_progress d-flex flex-column align-items-center justify-content-center">
-                                    <div class="cur_progress d-flex flex-row align-items-center justify-content-between">
-                                        <span>5 stars</span>
-                                        <div id="cur_pbar_1" class="cur_pbar" data-perc="0.80"></div>
-                                    </div>
-                                    <div class="cur_progress d-flex flex-row align-items-center justify-content-between">
-                                        <span>5 stars</span>
-                                        <div id="cur_pbar_2" class="cur_pbar" data-perc="0.20"></div>
-                                    </div>
-                                    <div class="cur_progress d-flex flex-row align-items-center justify-content-between">
-                                        <span>5 stars</span>
-                                        <div id="cur_pbar_3" class="cur_pbar" data-perc="0.0"></div>
-                                    </div>
-                                    <div class="cur_progress d-flex flex-row align-items-center justify-content-between">
-                                        <span>5 stars</span>
-                                        <div id="cur_pbar_4" class="cur_pbar" data-perc="0.0"></div>
-                                    </div>
-                                    <div class="cur_progress d-flex flex-row align-items-center justify-content-between">
-                                        <span>5 stars</span>
-                                        <div id="cur_pbar_5" class="cur_pbar" data-perc="0.0"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="panel_title">Review khóa học</div>
+
+
 
                             <div class="cur_reviews">
 
-                                <!-- Review -->
+                                @foreach($review as $index)
                                 <div class="review">
                                     <div class="review_title_container d-flex flex-row align-items-start justify-content-start">
                                         <div class="review_title d-flex flex-row align-items-center justify-content-center">
-                                            <div class="review_author_image"><div><img src="images/review_1.jpg" alt=""></div></div>
+                                            <div class="review_author_image"><div><img src="{{asset($index->avatar)}}" alt="" width="40" height="40"></div></div>
                                             <div class="review_author">
-                                                <div class="review_author_name"><a href="#">Sarah Parker</a></div>
-                                                <div class="review_date">Sep 29, 2017 at 9:48 am</div>
+                                                <div class="review_author_name"><a href="#">{{$index->username}}</a></div>
+                                                <div class="review_date">{{$index->created_at}}</div>
                                             </div>
                                         </div>
                                         <div class="review_stars ml-auto"><div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div></div>
                                     </div>
                                     <div class="review_text">
-                                        <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula.</p>
+                                        <p>{{$index->reviews}}</p>
                                     </div>
                                 </div>
+                                @endforeach
 
-                                <!-- Review -->
-                                <div class="review">
-                                    <div class="review_title_container d-flex flex-row align-items-start justify-content-start">
-                                        <div class="review_title d-flex flex-row align-items-center justify-content-center">
-                                            <div class="review_author_image"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>
-                                            <div class="review_author">
-                                                <div class="review_author_name"><a href="#">Sarah Parker</a></div>
-                                                <div class="review_date">Sep 29, 2017 at 9:48 am</div>
+                                @if($checkUserHaveCourse)
+                               <div class="review d-flex justify-content-between">
+                                   <div class="img" >
+                                       <img src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="" >
+                                   </div>
+                                   <div class="comment d-flex flex-column-reverse " >
+                                       <form action="/khoa-hoc/review" method="post">
+                                           @csrf
+                                            <div class="form-group">
+                                                <input type="text" name="course_id" class="form-control" value="{{$course->id}}" hidden>
+                                                <input type="text" class="form-control form-comment" name="review" data-text="1">
                                             </div>
-                                        </div>
-                                        <div class="review_stars ml-auto"><div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div></div>
-                                    </div>
-                                    <div class="review_text">
-                                        <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula.</p>
-                                    </div>
-                                </div>
 
-                                <!-- Review -->
-                                <div class="review">
-                                    <div class="review_title_container d-flex flex-row align-items-start justify-content-start">
-                                        <div class="review_title d-flex flex-row align-items-center justify-content-center">
-                                            <div class="review_author_image"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>
-                                            <div class="review_author">
-                                                <div class="review_author_name"><a href="#">Sarah Parker</a></div>
-                                                <div class="review_date">Sep 29, 2017 at 9:48 am</div>
-                                            </div>
-                                        </div>
-                                        <div class="review_stars ml-auto"><div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div></div>
-                                    </div>
-                                    <div class="review_text">
-                                        <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula.</p>
-                                    </div>
-                                </div>
-
+                                       </form>
+                                   </div>
+                               </div>
+                                @endif
                             </div>
                         </div>
 
@@ -393,95 +304,16 @@
                             </div>
                             <div class="members_list d-flex flex-row flex-wrap align-items-start justify-content-start">
 
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_1.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
 
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
 
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
 
-                                <!-- Member -->
+                                @foreach($members as $index)
                                 <div class="member">
-                                    <div class="member_image"><img src="images/member_2.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
+                                    <div class="member_image"><img src="{{asset($index->avatar)}}" alt="" width="80" height="80"></div>
+                                    <div class="member_title"><a href="#">{{$index->name}}</a></div>
                                 </div>
+                                @endforeach
 
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_3.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_4.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_5.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_6.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_7.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_8.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_9.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
-
-                                <!-- Member -->
-                                <div class="member">
-                                    <div class="member_image"><img src="images/member_0.jpg" alt=""></div>
-                                    <div class="member_title"><a href="#">Sarah Parker</a></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -491,7 +323,11 @@
                 <div class="col-lg-3">
                     <div class="sidebar">
                         <div class="sidebar_background"></div>
-                        <div class="sidebar_top"><a href="#">buy course</a></div>
+                        <div class="sidebar_top"><a href="#">
+                                @if($checkUserHaveCourse) ĐÃ MUA
+                                    @else MUA KHÓA HỌC
+                                    @endif
+                            </a></div>
                         <div class="sidebar_content">
 
                             <!-- Features -->
@@ -533,49 +369,26 @@
                                 </div>
                             </div>
 
-                            <!-- Cert -->
-                            <div class="sidebar_section cert">
-                                <div class="sidebar_title">Certification</div>
-                                <div class="cert_image"><img src="images/cert.jpg" alt=""></div>
-                            </div>
 
-                            <!-- You may like -->
+
+
+
                             <div class="sidebar_section like">
-                                <div class="sidebar_title">You may like</div>
+                                <div class="sidebar_title">Các khóa học khác</div>
                                 <div class="like_items">
 
-                                    <!-- Like Item -->
+
+                                    @foreach($relationCourse as $index)
                                     <div class="like_item d-flex flex-row align-items-end justify-content-start">
                                         <div class="like_title_container">
-                                            <div class="like_title">Vocabulary</div>
-                                            <div class="like_subtitle">Spanish</div>
+                                            <div class="like_title"><a href="/khoa-hoc/{{$index->slug}}">{{$index->name}}</a></div>
+                                            <div class="like_subtitle">{{$index->category}}</div>
                                         </div>
-                                        <div class="like_price ml-auto">Free</div>
+                                        <div class="like_price ml-auto">{{$index->price}}</div>
                                     </div>
-                                    <!-- Like Item -->
-                                    <div class="like_item d-flex flex-row align-items-end justify-content-start">
-                                        <div class="like_title_container">
-                                            <div class="like_title">Vocabulary</div>
-                                            <div class="like_subtitle">Spanish</div>
-                                        </div>
-                                        <div class="like_price ml-auto">Free</div>
-                                    </div>
-                                    <!-- Like Item -->
-                                    <div class="like_item d-flex flex-row align-items-end justify-content-start">
-                                        <div class="like_title_container">
-                                            <div class="like_title">Vocabulary</div>
-                                            <div class="like_subtitle">Spanish</div>
-                                        </div>
-                                        <div class="like_price ml-auto">Free</div>
-                                    </div>
-                                    <!-- Like Item -->
-                                    <div class="like_item d-flex flex-row align-items-end justify-content-start">
-                                        <div class="like_title_container">
-                                            <div class="like_title">Vocabulary</div>
-                                            <div class="like_subtitle">Spanish</div>
-                                        </div>
-                                        <div class="like_price ml-auto">Free</div>
-                                    </div>
+                                    @endforeach
+
+
                                 </div>
                             </div>
                         </div>
@@ -628,6 +441,12 @@
                $('iframe').attr('src','');
             });
 
+            $(".form-comment").keydown(function (event) {
+               if (event.keyCode == 13 && $(this).val() != ''){
+                  this.form.submit();
+               }
+
+            })
         })
     </script>
 @endsection

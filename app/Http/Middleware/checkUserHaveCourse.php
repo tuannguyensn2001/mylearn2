@@ -29,6 +29,7 @@ class checkUserHaveCourse
                 ['course_id', '=', $course_id],
                 ['user_id', '=', $user_id],
                 ['is_active','=',1],
+                ['type','=','1']
             ])
             ->first();
         return $relation == null ? response('',401) : $next($request);

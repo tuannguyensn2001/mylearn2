@@ -332,7 +332,7 @@ $course=$course->chunk(4);
                 $(this).addClass("focus");
             });
             $('.edit').click(function () {
-                $(".checkbox").attr("checked",false);
+                $(".checkbox").prop('checked',false);
                 let id=$(this).attr('user-id');
                 $.ajax({
                     type:'POST',
@@ -341,16 +341,16 @@ $course=$course->chunk(4);
                         id,
                     },
                     dataType:'json',
-
                     success: function(response){
                         let data=response[0];
                         let course=[];
                         for(let i in response[1]){
                            course.push(response[1][i]['course_id']);
                         }
+                        console.log(response);
                        document.querySelectorAll('.checkbox').forEach(index=>{
                            if (course.includes(parseInt(index.getAttribute("course")))){
-                               index.setAttribute("checked","checked");
+                              $(index).prop('checked',true);
 
                            }
 

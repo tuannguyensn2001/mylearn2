@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Course;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Validator;
@@ -11,7 +12,19 @@ class UserController extends Controller
 {
     public function show(Request $request)
     {
-        return Auth::user();
+        return response()->json(['auth'=>Auth::user(),'course'=>$this->getAuthCourse()]);
+    }
+    public function getAuthCourse()
+    {
+        $id=Auth::user()->id;
+        $course=Course::query()
+            ->select('courses.*')
+            ->leftJoin('usertocourse','usertocourse.course_id','=','courses.id')
+            ->where('usertocourse.user_id','=',$id)
+            ->where('usertocourse.type','=',1)
+            ->where('usertocourse.is_active','=',1)
+            ->get();
+        return $course;
     }
     public function edit(Request $request)
     {

@@ -7,6 +7,7 @@
     <meta name="description" content="Lingua project">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/0/08/Learn_area_logo.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" type="text/css" href="{{asset('home/styles/bootstrap4/bootstrap.min.css')}}">
     <link href="{{asset('home/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset('home/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -61,6 +62,13 @@
         }
         .profile-avatar{
             border-radius: 50%;
+        }
+        .course-description{
+            word-break: break-all;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
         }
     </style>
 </head>
@@ -282,26 +290,48 @@
             $(this).addClass("focus");
         });
         $(".user-profile").click(function(){
-            console.log($(this));
+
                $.ajax({
                    url:'{{route('getUser')}}',
                    method:'post',
                    data:{
                    },
                    dataType:'json',
-                   success: data=>{
-
+                   success: result=>{
+                        let course=result['course'];
+                        let data=result['auth'];
+                        $(".name").html(data['name'])
                        $(".profile-id").val(data['id']);
                        $(".profile-name").val(data['name']);
                        $(".profile-work_place").val(data['work_place']);
                        $(".profile-email").val(data['email']);
                        $(".profile-about").val(data['about']);
-
+                       $(".profile-created").html(data['created_at']);
                        console.log(data['avatar']);
                         let avatar=data['avatar'];
                        var base_url = window.location.origin;
 
                        $(".profile-avatar").attr('src',base_url+"/"+avatar);
+                        let chunk =[];
+                       for(let i=0;i<course.length;i+=3){
+                           if (i%3 ==0) {
+                               let child_course=[];
+                               for(let j=0;j<=2;j++){
+                                   child_course.push(course[i+j]);
+                               }
+                               chunk.push(child_course);
+                           }
+                       }
+                       chunk[chunk.length-1]=chunk[chunk.length-1].filter(index=>{
+                           return index != undefined
+                       });
+                       chunk.forEach((index,i)=>{
+                           $('.auth-course').append("<tr class="+i+"> ");
+                           index.forEach(item=>{
+                               let string="<td><a href='/khoa-hoc/"+item['slug']+"'>"+item['name']+"</a></td>";
+                                $(".auth-course ."+i+"").append(string);
+                           });
+                       });
                    }
 
                })

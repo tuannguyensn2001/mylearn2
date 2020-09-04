@@ -43,6 +43,7 @@ class AdminLessonController extends Controller
             $lesson= new Lesson();
             $lesson->name=$request->input('name');
             $lesson->slug=Str::slug($lesson->name,'-');
+            $lesson->description=$request->input('description');
             $lesson->video=$request->input('video');
             $lesson->status=$request->status_id;
             $lesson->course_id=$request->input('course_id');
@@ -61,6 +62,7 @@ class AdminLessonController extends Controller
        if (!$validator->fails()){
            $lesson=Lesson::find($request->lesson_id);
            $lesson->name=$request->name;
+           $lesson->description=$request->input('description');
            $lesson->slug=Str::slug($lesson->name,'-');
            $lesson->video=$request->video;
            $lesson->status=$request->lesson_status_id;

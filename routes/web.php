@@ -22,6 +22,13 @@ Route::get('/admin','AdminController@index')->name('admin');
 Route::get('/admin/register','AdminController@register');
 Route::post('/admin/login','AdminController@login')->name('adminLogin');
 Route::get('/admin/logout','AdminController@logout')->name('adminLogout');
+Route::get('/writer','WriterController@index')->name('writer');
+Route::post('/writer/login','WriterController@login')->name('writer.login');
+Route::get('/writer/logout','WriterController@logout')->name('writer.logout');
+Route::group(['prefix'=>'writer'],function (){
+    Route::get('/danh-sach-bai-viet/them-moi','WriterPostController@add')->name('writer.add.post');
+    Route::post('/danh-sach-bai-viet/them-moi','WriterPostController@create')->name('writer.create.post');
+});
 Route::group(["prefix"=>"admin",'middleware'=>'checkAdmin'],function (){
 
 
@@ -57,6 +64,30 @@ Route::group(["prefix"=>"admin",'middleware'=>'checkAdmin'],function (){
     Route::post('danh-sach-mentor/chinh-sua','AdminInstructorController@edit')->name('edit.mentor');
     Route::post('/danh-sach-mentor/thay-doi-khoa-hoc','AdminInstructorController@setCourse')->name('set.course.mentor');
     Route::post('/danh-sach-mentor/them-moi','AdminInstructorController@create')->name('create.mentor');
+
+    //Review
+    Route::get('/danh-sach-danh-gia/unchecked','AdminReviewController@unchecked')->name('list.unchecked.review');
+    Route::get('danh-sach-danh-gia/set/checked/{id}','AdminReviewController@setCheck');
+    Route::get('danh-sach-danh-gia/set/unchecked/{id}','AdminReviewController@setUnCheck');
+    Route::get('danh-sach-danh-gia','AdminReviewController@index')->name('list.review');
+    Route::get('danh-sach-danh-gia/reject','AdminReviewController@reject')->name('list.reject.review');
+
+    //Write
+    Route::get('/danh-sach-tac-gia','AdminWriterController@index')->name('list.writer');
+    Route::post('/danh-sach-tac-gia/them-tac-gia','AdminWriterController@create')->name('create.writer');
+    Route::post('danh-sach-tac-giac/thong-tin-chi-tiet','AdminWriterController@show')->name('show.writer');
+    Route::post('/danh-sach-tac-gia/chinh-sua-tac-gia','AdminWriterController@edit')->name('edit.writer');
+
+
+    //Post
+    Route::get('/danh-sach-bai-viet/unchecked','AdminPostController@unchecked')->name('list.unchecked.post');
+    Route::get('danh-sach-bai-viet/set/checked/{id}','AdminPostController@setCheck');
+    Route::get('danh-sach-bai-viet/set/unchecked/{id}','AdminPostController@setUnCheck');
+    Route::get('danh-sach-bai-viet/set/view/{id}','AdminPostController@View');
+    Route::get('danh-sach-bai-viet/set/unview/{id}','AdminPostController@UnView');
+    Route::get('danh-sach-bai-viet','AdminPostController@index')->name('list.post');
+    Route::get('danh-sach-bai-viet/reject','AdminPostController@reject')->name('list.reject.post');
+    Route::get('danh-sach-bai-viet/{slug}','AdminPostController@details');
 });
 Route::get('/api/danh-sach-bai-giang/{slug}','LessonController@showLesson')->middleware(['checkUserLogin','checkUserHaveCourse']);
 //Client
@@ -66,6 +97,7 @@ Route::get('/','HomePageController@index')->name('home');
 
 //Get Course
 Route::get('/khoa-hoc/{slug}','CourseController@index');
+Route::get('/danh-sach-khoa-hoc/load-more','CourseController@loadMore')->name('load.more.course');
 
 //Login,signup
 Route::get('/dang-nhap','HomePageController@loginPage')->name('login');
@@ -79,8 +111,18 @@ Route::get('/dang-xuat','HomePageController@logout')->name('logout.action');
 Route::post('/nguoi-dung-hien-tai','UserController@show')->name('getUser');
 Route::post('/nguoi-dung/edit','UserController@edit')->name('update.user');
 
+//Menu
+Route::get('/danh-sach-khoa-hoc','CourseController@course');
+Route::get('danh-sach-khoa-hoc/{slug}','CourseController@filter');
 
 
+//Review
+Route::post('/khoa-hoc/review','ReviewController@create');
+
+//Post
+Route::get('/danh-sach-bai-viet','PostController@index');
+Route::get('/danh-sach-bai-viet/{slug}','PostController@details');
+Route::post('/danh-sach-bai-viet/load-more','PostController@loadmore');
 ?>
 
 

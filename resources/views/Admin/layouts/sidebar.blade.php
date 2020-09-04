@@ -159,6 +159,87 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Quản lý đánh giá
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{Route('list.unchecked.review')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đang chờ duyệt</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{Route('list.review')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đã duyệt</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{Route('list.reject.review')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Không duyệt</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Quản lý các tác giả
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{Route('list.writer')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách tác giả</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Quản lý bài viết
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{Route('list.unchecked.post')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đang chờ duyệt</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{Route('list.post')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đã duyệt</p>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+                </li>
 
 
 

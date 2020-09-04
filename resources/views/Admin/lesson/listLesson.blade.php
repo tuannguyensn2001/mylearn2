@@ -95,6 +95,10 @@
                         <label for="">Link video</label>
                         <input type="text" class="form-control" name="video">
                     </div>
+                    <div class="form-group">
+                        <label for="">Mô tả bài giảng</label>
+                        <input type="text" class="form-control" name="description">
+                    </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="course-status-1" name="status_id" class="custom-control-input" value=1 checked>
                         <label class="custom-control-label" for="course-status-1">Sẵn sàng</label>
@@ -138,6 +142,10 @@
                         <div class="form-group">
                             <label for="">Link video</label>
                             <input type="text" class="form-control info_lesson_video" name="video">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Mô tả bài giảng</label>
+                            <input type="text" class="form-control info_lesson_description" name="description">
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="course-status-11" name="lesson_status_id" class="custom-control-input info_lesson_status" value=1 >

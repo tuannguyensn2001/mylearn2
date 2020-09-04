@@ -38,6 +38,7 @@ class AdminUserController extends Controller
         return [$user,$course];
     }
 
+
     public function setCourse(Request $request)
     {
         $course_id = $request->course_id;
@@ -47,13 +48,15 @@ class AdminUserController extends Controller
             ->where([
                 ['course_id', '=', $course_id],
                 ['user_id', '=', $user_id],
+                ['type','=','1']
             ])
             ->first();
+
         if ($check == 'true') {
             if ($relation != null ) {
                 $relation->is_active = 1;
-
                 $relation->save();
+                return $relation;
             }
             else {
                 $newRelation = new UserToCourse();
@@ -69,17 +72,6 @@ class AdminUserController extends Controller
             $relation->is_active = 0;
             $relation->save();
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

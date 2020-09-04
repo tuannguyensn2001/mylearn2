@@ -44,13 +44,13 @@
     <!-- Home -->
 
     <div class="home">
-        <div class="home_background" style="background-image: url(home/images/index_background.jpg);"></div>
+        <div class="home_background" style="background-image: url('https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); opacity: 0.6"></div>
         <div class="home_content">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <h1 class="home_title">Learn Languages Easily</h1>
-                        <div class="home_button trans_200"><a href="#">get started</a></div>
+                        <h1 class="home_title" style="color:#041621">Học lập trình với MyLearn</h1>
+                        <div class="home_button trans_200"><a href="/danh-sach-khoa-hoc">bắt đầu ngay !</a></div>
                     </div>
                 </div>
             </div>
@@ -86,12 +86,12 @@
                                     <li><a href="#">{{$index->category}}</a></li>
                                 </ul>
                             </div>
-                            <div class="course_text">
+                            <div class="course_text course-description">
                                 <p>{{$index->description}}</p>
                             </div>
                         </div>
                         <div class="course_footer d-flex flex-row align-items-center justify-content-start">
-                            <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>10</span></div>
+                            <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$index->count}}</span></div>
                             <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
                             <div class="course_mark course_free trans_200"><a href="#">Free</a></div>
                         </div>
@@ -206,63 +206,6 @@
 
     <!-- Events -->
 
-    <div class="events">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2 class="section_title text-center">Upcoming Events</h2>
-                </div>
-            </div>
-            <div class="row events_row">
-
-                <!-- Event -->
-                <div class="col-lg-4 event_col">
-                    <div class="event">
-                        <div class="event_image"><img src="images/event_1.jpg" alt=""></div>
-                        <div class="event_date d-flex flex-column align-items-center justify-content-center">
-                            <div class="event_day">26</div>
-                            <div class="event_month">aug</div>
-                        </div>
-                        <div class="event_body d-flex flex-row align-items-center justify-content-start">
-                            <div class="event_title"><a href="#">Networking Day</a></div>
-                            <div class="event_tag ml-auto">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event -->
-                <div class="col-lg-4 event_col">
-                    <div class="event">
-                        <div class="event_image"><img src="images/event_2.jpg" alt=""></div>
-                        <div class="event_date d-flex flex-column align-items-center justify-content-center">
-                            <div class="event_day">26</div>
-                            <div class="event_month">aug</div>
-                        </div>
-                        <div class="event_body d-flex flex-row align-items-center justify-content-start">
-                            <div class="event_title"><a href="#">Networking Day</a></div>
-                            <div class="event_tag ml-auto">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event -->
-                <div class="col-lg-4 event_col">
-                    <div class="event">
-                        <div class="event_image"><img src="images/event_3.jpg" alt=""></div>
-                        <div class="event_date d-flex flex-column align-items-center justify-content-center">
-                            <div class="event_day">26</div>
-                            <div class="event_month">aug</div>
-                        </div>
-                        <div class="event_body d-flex flex-row align-items-center justify-content-start">
-                            <div class="event_title"><a href="#">Networking Day</a></div>
-                            <div class="event_tag ml-auto">Free</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <!-- Blog -->
 
