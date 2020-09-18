@@ -139,12 +139,29 @@ $course=$course->chunk(4);
                                                                     <div class="text-muted"><small>Last seen 2 hours ago</small></div>
 
 
-                                                                    <div class="custom-file">
-                                                                        <input type="text" hidden name="id" class="profile-id">
-                                                                        <input type="file" class="custom-file-input" id="validatedCustomFile"  name="avatar">
-                                                                        <label class="custom-file-label" for="validatedCustomFile">Tải ảnh lên</label>
 
-                                                                    </div>
+                                                                       <div class="custom-file">
+                                                                           <input type="text" hidden name="id" class="profile-id">
+                                                                           <input type="file" class="custom-file-input" id="validatedCustomFile"  name="avatar">
+                                                                           <label class="custom-file-label" for="validatedCustomFile">Tải ảnh lên</label>
+
+                                                                       </div>
+
+                                                                            <div class="form-group">
+                                                                                <label for=""> Coin hiện có</label>
+                                                                                <div class="d-flex coin">
+
+                                                                                    <a href="" class="btn btn-danger minusCoin actionCoin "><i class="fas fa-minus"></i></a>
+                                                                                    <input type="text" name="coin" class="form-control profile-coin"   style="text-align: center">
+                                                                                    <a href="" class="btn btn-success plusCoin actionCoin "><i class="fas fa-plus"></i></a>
+
+                                                                                </div>
+
+                                                                            </div>
+
+
+
+
                                                                 </div>
                                                                 <div class="text-center text-sm-right">
                                                                     <span class="badge badge-secondary">administrator</span>
@@ -184,6 +201,7 @@ $course=$course->chunk(4);
                                                                                 <div class="form-group">
                                                                                     <label>Email</label>
                                                                                     <input class="form-control profile-email" type="text" name="email">
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -311,6 +329,8 @@ $course=$course->chunk(4);
 
 
 @section('js')
+
+
     <script>
 
         $(document).ready(function () {
@@ -361,6 +381,7 @@ $course=$course->chunk(4);
                         $(".profile-work_place").val(data['work_place']);
                         $(".profile-email").val(data['email']);
                         $(".profile-about").val(data['about']);
+                        $(".profile-coin").val(data['coin']);
 
 
 
@@ -387,6 +408,25 @@ $course=$course->chunk(4);
                 })
 
             })
+            $('.plusCoin').click(function(event){
+                event.preventDefault();
+                let value=parseInt($(this).parent().children('input').val());
+                value+=100;
+
+                $(this).parent().children('input').val(value);
+
+            });
+            $('.minusCoin').click(function(event){
+                event.preventDefault();
+                let value=parseInt($(this).parent().children('input').val());
+                value > 0 ? value-=100 : null;
+
+                $(this).parent().children('input').val(value);
+
+            });
+            const input = document.querySelector('.coin > input');
+            input.onkeypress=(event)=>event.preventDefault();
+
         })
     </script>
 @endsection

@@ -1,6 +1,9 @@
 
 
 @extends('layouts_page.main')
+@section('title')
+   Khóa học {{$course->name}}
+@endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/course.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/course_responsive.css')}}" type="text/css">
@@ -82,12 +85,11 @@
                 <div class="col">
                     <div class="intro_container d-flex flex-column align-items-start justify-content-end">
                         <div class="intro_content">
-                            <div class="intro_price">Free</div>
+                            <div class="intro_price">{{$course->price}} Coin</div>
                             <div class="rating_r rating_r_4 intro_rating"><i></i><i></i><i></i><i></i><i></i></div>
                             <div class="intro_title">{{$course->name}}</div>
                             <div class="intro_meta">
-                                <div class="intro_image"><img src="{{asset('/home/images/intro_user.jpg')}}" alt=""></div>
-                                <div class="intro_instructors"><a href="instructors.html">Sarah Parker</a> and <span><a href="instructors.html">5 other instructors</a></span></div>
+
                             </div>
                         </div>
                     </div>
@@ -203,7 +205,7 @@
                                     <div class="cur_item">
                                         <div class="cur_title_container d-flex flex-row align-items-start justify-content-start">
                                             <div class="cur_title">Bài giảng {{($key+1)}}</div>
-                                            <div class="cur_num ml-auto">0/4</div>
+                                            <div class="cur_num ml-auto"></div>
                                         </div>
                                         <div class="cur_item_content">
                                             <div class="cur_item_title">{{$index->name}}</div>
@@ -217,8 +219,8 @@
                                                         <ul>
                                                             <li class="d-flex flex-row align-items-center justify-content-start">
                                                                 <i class="fa fa-video-camera" aria-hidden="true"></i><span>Video bài giảng <a href="{{asset("api/danh-sach-bai-giang/$index->slug")}}" class="view" >Xem</a></span>
-                                                                <div class="cur_time ml-auto"><i class="fa fa-clock-o" aria-hidden="true"></i><span>15 minutes</span></div>
                                                             </li>
+
 
 
                                                         </ul>
@@ -298,9 +300,8 @@
 
                         <!-- Members -->
                         <div class="tab_panel members">
-                            <div class="panel_title">Members</div>
+                            <div class="panel_title">Thành viên khác</div>
                             <div class="panel_text">
-                                <p>Lorem ipsum dolor sit amet, te eros consulatu pro, quem labores petentium no sea, atqui posidonium interpretaris pri eu. At soleat maiorum platonem vix, no mei case fierent. Primis quidam ancillae te mei.</p>
                             </div>
                             <div class="members_list d-flex flex-row flex-wrap align-items-start justify-content-start">
 
@@ -323,48 +324,46 @@
                 <div class="col-lg-3">
                     <div class="sidebar">
                         <div class="sidebar_background"></div>
-                        <div class="sidebar_top"><a href="#">
-                                @if($checkUserHaveCourse) ĐÃ MUA
-                                    @else MUA KHÓA HỌC
-                                    @endif
-                            </a></div>
+                        @if($checkUserHaveCourse)
+                            <div class="sidebar_top"><a href="#" >ĐÃ MUA</a></div>
+                        @else
+                            @if(\Illuminate\Support\Facades\Auth::check())
+                                <div class="sidebar_top"><a href=""  class="warning_buy_course" data-toggle="modal" data-target="#confirmBuyCourse">MUA KHÓA HỌC</a></div>
+                            @else
+                                <div class="sidebar_top"><a href=""  class=" warning_have_course">MUA KHÓA HỌC</a></div>
+                            @endif
+
+                        @endif
+
                         <div class="sidebar_content">
 
                             <!-- Features -->
                             <div class="sidebar_section features">
-                                <div class="sidebar_title">Course Features</div>
+                                <div class="sidebar_title">Thông tin khóa học</div>
                                 <div class="features_content">
                                     <ul class="features_list">
 
                                         <!-- Feature -->
                                         <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration</span></div>
-                                            <div class="feature_text ml-auto">2 weeks</div>
+                                            <div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Thời gian học</span></div>
+                                            <div class="feature_text ml-auto">2 tháng</div>
                                         </li>
 
                                         <!-- Feature -->
                                         <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-bell" aria-hidden="true"></i><span>Lectures</span></div>
-                                            <div class="feature_text ml-auto">10</div>
+                                            <div class="feature_title"><i class="fa fa-bell" aria-hidden="true"></i><span>Bài giảng</span></div>
+                                            <div class="feature_text ml-auto">20</div>
                                         </li>
 
                                         <!-- Feature -->
                                         <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-id-badge" aria-hidden="true"></i><span>Quizzes</span></div>
-                                            <div class="feature_text ml-auto">3</div>
+                                            <div class="feature_title"><i class="fa fa-id-badge" aria-hidden="true"></i><span>Truy cập mọi lúc mọi nơi</span></div>
+                                            <div class="feature_text ml-auto"></div>
                                         </li>
 
-                                        <!-- Feature -->
-                                        <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span>Pass Percentage</span></div>
-                                            <div class="feature_text ml-auto">60</div>
-                                        </li>
 
-                                        <!-- Feature -->
-                                        <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-thumbs-down" aria-hidden="true"></i><span>Max Retakes</span></div>
-                                            <div class="feature_text ml-auto">5</div>
-                                        </li>
+
+
                                     </ul>
                                 </div>
                             </div>
@@ -399,6 +398,28 @@
         </div>
     </div>
 
+        <div class="modal fade" id="confirmBuyCourse" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-top: 230px">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Mua khóa học này</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Khóa học này trị giá {{$course->price}} coin</p>
+                        <p>Bạn có chắc chắn muốn mua chứ ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary confirm-buy-course">Đồng ý</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('js')
@@ -407,7 +428,13 @@
     <script src="{{asset('home/js/course.js')}}"></script>
     <script>
         $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $('.view').click(function (event) {
+                $('.this-body .alert-danger').remove();
                 event.preventDefault();
                 $('.bd-example-modal-lg').modal({
                     backdrop: 'static',
@@ -429,6 +456,8 @@
                         $('.this-title').html(name);
                         let video='<iframe width="100%" height="700" src="https://www.youtube.com/embed/'+data+'" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                         $('.this-body').append(video);
+
+                        // window.location.href='/lesson';
                     },
                     error:data=>{
 
@@ -446,6 +475,40 @@
                   this.form.submit();
                }
 
+            })
+            $('.warning_have_course').click(function(event){
+                event.preventDefault();
+                window.location.href = '{{route('login')}}';
+            })
+            $('.confirm-buy-course').click(function(){
+                $('#confirmBuyCourse .modal-body .alert').remove();
+                const course_id={{$course->id}};
+
+                $.ajax({
+                    url: '{{route('buy.course')}}',
+                    method: 'post',
+                    data:{course_id},
+                    success:function(data){
+                       let status=data['status'];
+                        if (status == 200){
+                                location.reload();
+                        } else{
+                            const element=`<div class="alert alert-danger" role="alert">
+  Mua không thành công, vui lòng kiểm tra lại lượng coin của bạn !
+</div>`;
+                            $('#confirmBuyCourse .modal-body').append(element);
+                        }
+                    },
+                    error:function(error){
+                        const element=`<div class="alert alert-danger" role="alert">
+  Mua không thành công, vui lòng kiểm tra lại lượng coin của bạn !
+</div>`;
+                        $('#confirmBuyCourse .modal-body').append(element);
+                    }
+                })
+            })
+            $('.warning_buy_course').click(function(){
+                $('#confirmBuyCourse .modal-body .alert').remove();
             })
         })
     </script>

@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/danh-sach-bai-giang','AdminLessonController@getAll')->name('api.getLesson');
 
-
+Route::get('/danh-sach-khoa-hoc','CourseController@get');
+Route::post('/cap-nhat-khoa-hoc','CourseController@updateApi');
 

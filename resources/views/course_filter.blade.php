@@ -1,5 +1,8 @@
 
 @extends('layouts_page.main')
+@section('title')
+    Danh sách khóa học {{$category_name}}
+    @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/courses.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/courses_responsive.css')}}" type="text/css">
@@ -27,6 +30,9 @@
         }
     </style>
 @endsection
+
+
+@section('content')
 <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
     <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
     <div class="search">
@@ -83,8 +89,12 @@
 <div class="language">
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col d-flex justify-content-between">
                 <div class="language_title">Học lập trình dễ dàng hơn với MyLearn</div>
+                <select class="custom-select filter">
+                    <option selected>Sắp xếp</option>
+
+                </select>
             </div>
         </div>
         <div class="row">
@@ -119,14 +129,14 @@
                                 <li><a href="/danh-sach-khoa-hoc/{{$index->cate_slug}}">{{$index->category}}</a></li>
                             </ul>
                         </div>
-                        <div class="course_text">
+                        <div class="course_text course-description">
                             <p>{{$index->description}}</p>
                         </div>
                     </div>
                     <div class="course_footer d-flex flex-row align-items-center justify-content-start">
                         <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$index->count}}</span></div>
                         <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
-                        <div class="course_mark course_free trans_200"><a href="#">Free</a></div>
+                        <div class="course_mark course_free trans_200"><a href="#">{{$index->price}}</a></div>
                     </div>
                 </div>
             </div>
@@ -139,16 +149,82 @@
     </div>
 </div>
 
-
+@endsection
 
 @section('js')
     <script src="{{asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
     <script src="{{asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
     <script src="{{asset('home/js/courses.js')}}"></script>
     <script>
+        let filter=['Giá tăng dần','Giá giảm dần','Số học viên tăng dần','Số học viên giảm dần'];
+        function removeCourse(){
+            $('.courses_row').empty();
+        }
+
+        function sortByPrice(condition){
+            let element=document.querySelectorAll('.course_col');
+            let course=[];
+            element.forEach(item=>course.push(item));
+
+            course.sort((a,b)=>{
+
+                let first=parseInt(a.childNodes[1].childNodes[5].childNodes[5].childNodes[0].innerHTML);
+                let second=parseInt(b.childNodes[1].childNodes[5].childNodes[5].childNodes[0].innerHTML);
+                return condition == 'asc' ? first - second : second - first;
+            })
+            removeCourse();
+            course.forEach(item=>$('.courses_row').append(item));
 
 
+        }
 
+        function sortByStudents(condition){
+            let element=document.querySelectorAll('.course_col');
+            let course=[];
+            element.forEach(item=>course.push(item));
 
+            course.sort((a,b)=>{
+
+                let first=parseInt(a.childNodes[1].childNodes[5].childNodes[1].childNodes[1].innerHTML);
+                let second=parseInt(b.childNodes[1].childNodes[5].childNodes[1].childNodes[1].innerHTML);
+                return condition == 'asc' ? first - second : second - first;
+            })
+            removeCourse();
+            course.forEach(item=>$('.courses_row').append(item));
+        }
+
+        function renderChoice(filter){
+
+            filter.forEach((item,index)=>{
+                let option = document.createElement('option');
+                option.value=index;
+                let content = document.createTextNode(item);
+                option.append(content);
+                document.querySelector('.filter').appendChild(option);
+            })
+        }
+
+        function listenerChange(value){
+            switch (value){
+                case '0':
+                    sortByPrice('asc');
+                    break;
+                case '1':
+                    sortByPrice('desc');
+                    break;
+                case '2':
+                    sortByStudents('asc');
+                    break;
+                case '3':
+                    sortByStudents('desc');
+                    break;
+            }
+        }
+        renderChoice(filter);
+        sortByStudents('asc');
+
+        document.querySelector('.filter').addEventListener('change',function(event){
+            listenerChange(event.target.value);
+        })
     </script>
 @endsection

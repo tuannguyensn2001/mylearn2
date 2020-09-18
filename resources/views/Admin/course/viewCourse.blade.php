@@ -89,6 +89,10 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="">Giá khóa học</label>
+                            <input type="text" name="price" class="form-control info-price">
+                        </div>
                         <div class="custom-file">
 
                             <input type="file" class="custom-file-input" id="customFile" name="thumbnail">
@@ -152,6 +156,7 @@
                             $('.info-name').val(course['name']);
                             $('.info-id').val(course['id']);
                             $('.info-description').val(course['description']);
+                            $('.info-price').val(course['price']);
                             $('#category-'+course['category_id']).attr('selected','selected')
                             $('.info-thumbnail').attr('src',course['thumbnail']);
                             $('#course-status-'+course['status_id']).attr('checked',true);
@@ -159,6 +164,13 @@
                     })
 
             })
+            $('form').submit(function(event){
+                const value = $(".info-price").val();
+                if (value % 100 != 0){
+                    event.preventDefault();
+                    alert("Giá khóa học không hợp lệ");
+                }
+            });
         })
     </script>
 @endsection

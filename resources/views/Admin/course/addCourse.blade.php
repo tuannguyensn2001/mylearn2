@@ -60,6 +60,10 @@
                         <input type="file" class="custom-file-input" id="customFile" name="thumbnail">
                         <label class="custom-file-label" for="customFile">Chọn ảnh khóa học</label>
                     </div>
+                    <div class="form-group">
+                        <label for="">Giá khóa học</label>
+                        <input type="text" name="price" class="form-control info-price">
+                    </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="customRadioInline1" name="status_id" class="custom-control-input" value=1 checked>
                         <label class="custom-control-label" for="customRadioInline1">Sẵn sàng</label>
@@ -85,3 +89,17 @@
     @section('title')
         Thêm mới khóa học
     @endsection
+
+    @section('js')
+        <script>
+            $(document).ready(function(){
+                $('form').submit(function(event){
+                    const value = $(".info-price").val();
+                    if (value % 100 != 0){
+                        event.preventDefault();
+                        alert("Giá khóa học không hợp lệ");
+                    }
+                });
+            })
+        </script>
+        @endsection

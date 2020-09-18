@@ -79,7 +79,7 @@
 
                @foreach($category as $index)
                 <div class="col-xl-2 col-lg-4 col-md-6 blog_category_col">
-                    <a href="/danh-sach-bai-viet?category={{$index->slug}}">
+                    <a href="?category={{$index->slug}}">
                         <div class="blog_category">
                             <div class="blog_category_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
                             <div class="blog_category_title">{{$index->name}}</div>
@@ -125,16 +125,21 @@
 @section('js')
     <script src="{{asset('home/js/blog.js')}}"></script>
     <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const category_slug = urlParams.get('category');
         $(document).ready(function(){
             $(".load_more_button").click(function(event){
                 event.preventDefault();
                 let count=document.getElementsByClassName("blog_post").length;
+
+
                 $.ajax({
                     url: 'danh-sach-bai-viet/load-more',
                     type:'post',
-                    data:{count},
+                    data:{count,category_slug},
 
                     success:function(data){
+
                       let status=data['status'];
                       if (status == 0) $(".load_more_button").remove();
                       let posts=data['post'];
@@ -158,5 +163,20 @@
                 })
             })
         })
+
+        const category=document.querySelectorAll('.blog_category_col a');
+        let this_category;
+        category.forEach(item=>{
+            if(item.href.includes(category_slug)) this_category=item;
+        });
+        const here = this_category.childNodes[1].childNodes[1];
+        here.style.background='rgba(46, 33, 223, 0)';
+    </script>
+
+
+
+    <script>
+
+
     </script>
 @endsection

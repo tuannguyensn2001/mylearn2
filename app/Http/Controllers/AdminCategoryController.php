@@ -34,6 +34,12 @@ class AdminCategoryController extends Controller
         if (!$validator->fails()){
             $category = new Category();
             $category->name=$request->input('name');
+            if ($request->hasFile('thumbnail')){
+                $file=$request->thumbnail;
+                $thumbnail='upload/category/'.$file->getClientOriginalName();
+                $category->thumbnail=$thumbnail;
+                $file->move('upload/category',$file->getClientOriginalName());
+            }
             $category->slug=Str::slug($category->name,'-');
             $category->save();
         }
@@ -87,6 +93,12 @@ class AdminCategoryController extends Controller
         if (!$validator->fails()){
             $category=Category::find($request->id);
             $category->name=$request->name;
+            if ($request->hasFile('thumbnail')){
+                $file=$request->thumbnail;
+                $thumbnail='upload/category/'.$file->getClientOriginalName();
+                $category->thumbnail=$thumbnail;
+                $file->move('upload/category',$file->getClientOriginalName());
+            }
             $category->save();
         }
         return redirect()->back();

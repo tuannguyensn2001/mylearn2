@@ -5,9 +5,9 @@
 @endsection
 @section('css')
     <style>
-        img{
-            width: 200px;
-            height: 200px;
+        .form-group img{
+            width: 300px;
+            height: 300px;
         }
     </style>
 @endsection
@@ -64,7 +64,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title"></h4>
+                        <h4 class="modal-title">Chỉnh sửa danh mục</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,8 +77,17 @@
                                 <label for="">Tên khóa học</label>
                                 <input type="text" name="name" class="form-control info-name"  >
                             </div>
+                            <div class="form-group ">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile" required name="thumbnail">
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
 
-
+                            </div>
+                            <div class="form-group">
+                                <div><img src="#" alt="" id="thumbnail"></div>
+                            </div>
 
 
 
@@ -100,7 +109,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Thêm mới khóa học</h4>
+                        <h4 class="modal-title">Thêm mới danh mục</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -113,7 +122,17 @@
                                 <label for="">Tên khóa học</label>
                                 <input type="text" name="name" class="form-control "  >
                             </div>
+                            <div class="form-group ">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile1" required name="thumbnail">
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
 
+                            </div>
+                            <div class="form-group">
+                                <div><img src="#" alt="" id="thumbnail1"></div>
+                            </div>
 
 
 
@@ -147,8 +166,28 @@
 
                 }
             });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#thumbnail1').attr('src', e.target.result);
+                        $('#thumbnail').attr('src', e.target.result);
+                        document.getElementById("thumbnail").style.width="500px";
+                        document.getElementById("thumbnail1").style.width="500px";
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#validatedCustomFile").change(function () {
+                readURL(this);
+            });
+            $("#validatedCustomFile1").change(function () {
+                readURL(this);
+            });
             $('.edit').click(function () {
-                $(".modal-title").html('Chỉnh sửa khóa học');
+
                 let id=$(this).attr('category-id');
                 $.ajax({
                     type:'POST',
@@ -158,6 +197,7 @@
                     },
 
                     success: function(data){
+                        $("#thumbnail").attr('src',data['thumbnail']);
                         $('.info-id').val(data['id']);
                         $('.info-name').val(data['name']);
 

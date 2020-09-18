@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Course;
 use App\Instructor;
+use App\Post;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +32,8 @@ class HomePageController extends Controller
        View::share('instructor',$instructor);
 
 
-
+        $this->getLatestPost();
+        $this->getCategory();
         View::share('course',$course);
     }
 
@@ -82,10 +85,27 @@ class HomePageController extends Controller
             $user->password=bcrypt($request->password);
             $user->avatar="upload/users/avatar/default.png";
             $user->status=1;
+            $user->coin=500;
             $user->save();
             return redirect()->route('login');
         }
         return redirect()->back()->withErrors($validator);
+    }
+    public function getLatestPost()
+    {
+        $post=Post::query()
+            ->select('posts.*','categories.name as category')
+            ->leftJoin('categories','categories.id','=','posts.category_id')
+            ->where('posts.is_active','=',1)
+            ->where('posts.status','=','1')
+            ->orderBy("posts.created_at")
+            ->first();
+        View::share('post',$post);
+    }
+    public function getCategory()
+    {
+        $category=Category::all();
+        View::share('category',$category);
     }
 
 

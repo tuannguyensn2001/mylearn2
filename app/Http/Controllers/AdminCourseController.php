@@ -115,6 +115,7 @@ class AdminCourseController extends Controller
                     $category_id=$request->category_id;
                     $course->status_id=$request->status_id;
                     $course->name=$name;
+                    $course->price=$request->price;
                     $course->description=$description;
                     $course->slug=Str::slug($name,'-');
                     $course->category_id=$category_id;

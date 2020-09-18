@@ -1,5 +1,10 @@
 
 @extends('layouts_page.main')
+
+@section('title')
+    Danh sách khóa học
+@endsection
+
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/courses.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/courses_responsive.css')}}" type="text/css">
@@ -27,6 +32,7 @@
         }
     </style>
 @endsection
+@section('content')
 <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
     <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
     <div class="search">
@@ -68,9 +74,9 @@
             <div class="row">
                 <div class="col">
                     <ul class="breadcrumbs_list d-flex flex-row align-items-center justify-content-start">
-                        <li><a href="/">home</a></li>
-                        <li><a href="/danh-sach-khoa-hoc">courses</a></li>
-                        <li>All</li>
+                        <li><a href="/">Trang chủ</a></li>
+                        <li><a href="/danh-sach-khoa-hoc">Khóa học</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -80,11 +86,17 @@
 
 <!-- Language -->
 
+
+
 <div class="language">
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col d-flex justify-content-between">
                 <div class="language_title">Học lập trình dễ dàng hơn với MyLearn</div>
+                <select class="custom-select filter">
+                    <option selected>Sắp xếp</option>
+
+                </select>
             </div>
         </div>
         <div class="row">
@@ -106,51 +118,152 @@
 <div class="courses">
     <div class="container">
         <div class="row courses_row">
-
             @foreach($course as $index)
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
-                    <div class="course_body">
-                        <div class="course_title"><a href="/khoa-hoc/{{$index->slug}}">{{$index->name}}</a></div>
-                        <div class="course_info">
-                            <ul>
+                <div class="col-lg-4 course_col">
+                    <div class="course">
+                        <div class="course_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
+                        <div class="course_body">
+                            <div class="course_title"><a href="/khoa-hoc/{{$index->slug}}">{{$index->name}}</a></div>
+                            <div class="course_info">
+                                <ul>
 
-                                <li><a href="/danh-sach-khoa-hoc/{{$index->cate_slug}}">{{$index->category}}</a></li>
-                            </ul>
+                                    <li><a href="/danh-sach-khoa-hoc/{{$index->cate_slug}}">{{$index->category}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="course_text course-description">
+                                <p>{{$index->description}}</p>
+                            </div>
                         </div>
-                        <div class="course_text course-description">
-                            <p>{{$index->description}}</p>
+                        <div class="course_footer d-flex flex-row align-items-center justify-content-start">
+                            <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$index->count}}</span></div>
+                            <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
+                            <div class="course_mark course_free trans_200"><a href="#">{{$index->price}}</a></div>
                         </div>
-                    </div>
-                    <div class="course_footer d-flex flex-row align-items-center justify-content-start">
-                        <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$index->count}}</span></div>
-                        <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
-                        <div class="course_mark course_free trans_200"><a href="#">Free</a></div>
                     </div>
                 </div>
-            </div>
             @endforeach
+
 
 
         </div>
 
         <div class="row">
             <div class="col">
-                <div class="load_more_button"><a href="#">load more</a></div>
+                <div class="load_more_button" ><a href="#">load more</a></div>
+
             </div>
         </div>
     </div>
 </div>
 
 
-
+@endsection
 @section('js')
     <script src="{{asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
     <script src="{{asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
     <script src="{{asset('home/js/courses.js')}}"></script>
     <script>
+        let filter=['Giá tăng dần','Giá giảm dần','Số học viên tăng dần','Số học viên giảm dần'];
+        function removeCourse(){
+            $('.courses_row').empty();
+        }
 
+        function sortByPrice(condition){
+            let element=document.querySelectorAll('.course_col');
+            let course=[];
+            element.forEach(item=>course.push(item));
+
+            course.sort((a,b)=>{
+
+                let first=parseInt(a.childNodes[1].childNodes[5].childNodes[5].childNodes[0].innerHTML);
+                let second=parseInt(b.childNodes[1].childNodes[5].childNodes[5].childNodes[0].innerHTML);
+                return condition == 'asc' ? first - second : second - first;
+            })
+            removeCourse();
+            course.forEach(item=>$('.courses_row').append(item));
+
+
+        }
+
+        function sortByStudents(condition){
+            let element=document.querySelectorAll('.course_col');
+            let course=[];
+            element.forEach(item=>course.push(item));
+
+            course.sort((a,b)=>{
+
+                let first=parseInt(a.childNodes[1].childNodes[5].childNodes[1].childNodes[1].innerHTML);
+                let second=parseInt(b.childNodes[1].childNodes[5].childNodes[1].childNodes[1].innerHTML);
+                return condition == 'asc' ? first - second : second - first;
+            })
+            removeCourse();
+            course.forEach(item=>$('.courses_row').append(item));
+        }
+
+        function renderChoice(filter){
+
+            filter.forEach((item,index)=>{
+                let option = document.createElement('option');
+                option.value=index;
+                let content = document.createTextNode(item);
+                option.append(content);
+                document.querySelector('.filter').appendChild(option);
+            })
+        }
+
+        function listenerChange(value){
+            switch (value){
+                case '0':
+                    sortByPrice('asc');
+                    break;
+                case '1':
+                    sortByPrice('desc');
+                    break;
+                case '2':
+                    sortByStudents('asc');
+                    break;
+                case '3':
+                    sortByStudents('desc');
+                    break;
+            }
+        }
+        renderChoice(filter);
+        sortByStudents('asc');
+
+        document.querySelector('.filter').addEventListener('change',function(event){
+                listenerChange(event.target.value);
+        })
+    </script>
+    <script>
+        function renderCourse(data){
+            data.forEach(item=> {
+
+                let element = ` <div class="col-lg-4 course_col">
+                <div class="course">
+                    <div class="course_image"><img src="${item['thumbnail']}" alt=""></div>
+                    <div class="course_body">
+                        <div class="course_title"><a href="/khoa-hoc/${item['slug']}">${item['name']}</a></div>
+                        <div class="course_info">
+                            <ul>
+
+                                <li><a href="/danh-sach-khoa-hoc/${item['cate_slug']}">${item['category']}</a></li>
+                            </ul>
+                        </div>
+                        <div class="course_text course-description">
+                            <p>${item['description']}</p>
+                        </div>
+                    </div>
+                    <div class="course_footer d-flex flex-row align-items-center justify-content-start">
+                        <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>${item['count']}</span></div>
+                        <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
+                        <div class="course_mark course_free trans_200"><a href="#">${item['price']}</a></div>
+                    </div>
+                </div>
+            </div>`;
+                $(".courses_row").append(element);
+            })
+            listenerChange(document.querySelector('.filter').value);
+        }
 
 
         $('.load_more_button').click(function (event) {
@@ -166,31 +279,8 @@
                     success: function (data) {
                         let status=data['status'];
                         if (status == 0) loadmore.remove();
-                       data['courses'].forEach(item=>{
-                           console.log(item);
-                           let element="  <div class=\"col-lg-4 course_col\">\n" +
-                               "                <div class=\"course\">\n" +
-                               "                    <div class=\"course_image\"><img src=\""+item['thumbnail']+"\" alt=\"\"></div>\n" +
-                               "                    <div class=\"course_body\">\n" +
-                               "                        <div class=\"course_title\"><a href=\""+"/khoa-hoc/"+item['slug']+"\">"+item['name']+"</a></div>\n" +
-                               "                        <div class=\"course_info\">\n" +
-                               "                            <ul>\n" +
-                               "                                <li><a href=\"/danh-sach-khoa-hoc/"+item['cate_slug']+"\">"+item['category']+"</a></li>\n" +
-                               "                            </ul>\n" +
-                               "                        </div>\n" +
-                               "                        <div class=\"course_text course-description\">\n" +
-                               "                            <p>"+item['description']+"</p>\n" +
-                               "                        </div>\n" +
-                               "                    </div>\n" +
-                               "                    <div class=\"course_footer d-flex flex-row align-items-center justify-content-start\">\n" +
-                               "                        <div class=\"course_students\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i><span>"+item['count']+"</span></div>\n" +
-                               "                        <div class=\"course_rating ml-auto\"><i class=\"fa fa-star\" aria-hidden=\"true\"></i><span>4,5</span></div>\n" +
-                               "                        <div class=\"course_mark course_free trans_200\"><a href=\"#\">Free</a></div>\n" +
-                               "                    </div>\n" +
-                               "                </div>\n" +
-                               "            </div>";
-                               $(".courses_row").append(element);
-                       })
+                        renderCourse(data['courses'])
+
                     },
                     error: data=>{
                         console.log(data);
@@ -198,4 +288,5 @@
                 })
         })
     </script>
+
 @endsection

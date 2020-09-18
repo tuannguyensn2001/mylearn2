@@ -11,7 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="https://scontent.fhan5-4.fna.fbcdn.net/v/t1.0-9/74325209_2400863506847928_6443764924819701760_o.jpg?_nc_cat=104&_nc_sid=174925&_nc_ohc=w8RFKCC3UOkAX9utvGs&_nc_ht=scontent.fhan5-4.fna&oh=2e8d98baed07efd41e11084c6ecb8e78&oe=5F6184D9" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('upload/admin/avatar/admin.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{Auth::guard('admin')->user()->name}}</a>

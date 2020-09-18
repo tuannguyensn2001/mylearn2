@@ -7,7 +7,9 @@ use App\Course;
 use App\Instructor;
 use App\Lesson;
 use App\Review;
+use App\User;
 use App\UserToCourse;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -123,14 +125,14 @@ class CourseController extends Controller
     public function course()
     {
 
+        $courses=Course::query()
+            ->select('courses.*','categories.name as category','categories.slug as cate_slug','count.count')
+            ->leftJoin('categories','categories.id','=','courses.category_id')
+            ->join(DB::raw('(SELECT COUNT(user_id) as count,course_id FROM usertocourse WHERE type=1 GROUP BY course_id) as count'),'count.course_id','=','courses.id')
+            ->take(3)
+            ->get();
 
 
-      $courses=Course::query()
-          ->select('courses.*','categories.name as category','categories.slug as cate_slug','count.count')
-          ->leftJoin('categories','categories.id','=','courses.category_id')
-          ->join(DB::raw('(SELECT COUNT(user_id) as count,course_id FROM usertocourse WHERE type=1 GROUP BY course_id) as count'),'count.course_id','=','courses.id')
-          ->take(3)
-          ->get();
 
 
 
@@ -141,6 +143,10 @@ class CourseController extends Controller
             'category'=>Category::all(),
         ]);
     }
+
+
+
+
     public function loadMore(Request $request)
     {
         $count=Course::all()->count()-3;
@@ -171,7 +177,76 @@ class CourseController extends Controller
             'category'=>Category::all()
         ]);
     }
+    public function buy(Request $request)
+    {
+
+        $user_id=Auth::user()->id;
+        $course_id=$request->course_id;
+
+        $coin=User::query()
+            ->select('coin')
+            ->where('id','=',$user_id)
+            ->first()->coin;
+
+        $price=Course::query()
+            ->select('price')
+            ->where('id','=',$course_id)
+            ->first()->price;
 
 
+
+
+
+        if ($coin >= $price){
+
+
+            $this->buyCourse($course_id,$user_id);
+
+
+            $user= User::find($user_id);
+            $user->coin=$coin-$price;
+            $user->save();
+            return response()->json(['message'=>'Mua thành công','status'=>200],200);
+        }
+        return response()->json(['status'=>202],202);
+    }
+    public function buyCourse($course_id,$user_id)
+    {
+
+        $check = true;
+        $relation = UserToCourse::query()
+            ->where([
+                ['course_id', '=', $course_id],
+                ['user_id', '=', $user_id],
+                ['type','=','1']
+            ])
+            ->first();
+
+        if ($check == 'true') {
+            if ($relation != null ) {
+                $relation->is_active = 1;
+                $relation->save();
+
+            }
+            else {
+                $newRelation = new UserToCourse();
+
+                $newRelation->course_id = $course_id;
+                $newRelation->user_id = $user_id;
+                $newRelation->is_active = 1;
+                $newRelation->type=1;
+                $newRelation->save();
+            }
+        } else{
+
+            $relation->is_active = 0;
+            $relation->save();
+        }
+
+    }
+    public function lesson()
+    {
+        return view('lesson');
+    }
 
 }

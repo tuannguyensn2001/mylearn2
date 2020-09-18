@@ -15,9 +15,16 @@
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/course',function(){
+    return 1;
+});
+
+
+//Day la cai ma e muon goi
 //Admin
+
 Route::get('/admin','AdminController@index')->name('admin');
 Route::get('/admin/register','AdminController@register');
 Route::post('/admin/login','AdminController@login')->name('adminLogin');
@@ -28,6 +35,10 @@ Route::get('/writer/logout','WriterController@logout')->name('writer.logout');
 Route::group(['prefix'=>'writer'],function (){
     Route::get('/danh-sach-bai-viet/them-moi','WriterPostController@add')->name('writer.add.post');
     Route::post('/danh-sach-bai-viet/them-moi','WriterPostController@create')->name('writer.create.post');
+    Route::get('/danh-sach-bai-viet','WriterPostController@index')->name('writer.show.post');
+    Route::get('/danh-sach-bai-viet/{slug}','WriterPostController@details');
+    Route::get('/danh-sach-bai-viet/chinh-sua/{id}','WriterPostController@editView');
+    Route::post('/danh-sach-bai-viet/chinh-sua','WriterPostController@edit')->name('writer.edit.post');
 });
 Route::group(["prefix"=>"admin",'middleware'=>'checkAdmin'],function (){
 
@@ -98,6 +109,8 @@ Route::get('/','HomePageController@index')->name('home');
 //Get Course
 Route::get('/khoa-hoc/{slug}','CourseController@index');
 Route::get('/danh-sach-khoa-hoc/load-more','CourseController@loadMore')->name('load.more.course');
+Route::post('/khoa-hoc/mua-khoa-hoc','CourseController@buy')->name('buy.course');
+Route::get('/lesson','CourseController@lesson');
 
 //Login,signup
 Route::get('/dang-nhap','HomePageController@loginPage')->name('login');
@@ -123,6 +136,11 @@ Route::post('/khoa-hoc/review','ReviewController@create');
 Route::get('/danh-sach-bai-viet','PostController@index');
 Route::get('/danh-sach-bai-viet/{slug}','PostController@details');
 Route::post('/danh-sach-bai-viet/load-more','PostController@loadmore');
+
+
+
+//Comment
+Route::post('/danh-sach-bai-viet/dang-binh-luan','CommentController@create')->name('create.comment');
 ?>
 
 

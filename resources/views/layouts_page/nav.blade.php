@@ -52,8 +52,8 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
                         <div class="logo_container mr-auto">
-                            <a href="#">
-                                <div class="logo_text">Lingua</div>
+                            <a href="/">
+                                <div class="logo_text">MyLearn</div>
                             </a>
                         </div>
                         <nav class="main_nav_contaner">
@@ -68,12 +68,7 @@
                         <div class="header_content_right ml-auto text-right">
                             <div class="header_search">
                                 <div class="search_form_container">
-                                    <form action="#" id="search_form" class="search_form trans_400">
-                                        <input type="search" class="header_search_input trans_400" placeholder="Type for Search" required="required">
-                                        <div class="search_button">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </div>
-                                    </form>
+
                                 </div>
                             </div>
 
@@ -153,6 +148,8 @@
                                                                 <div class="mt-2 custom-file">
                                                                     <input type="text" hidden name="id" class="profile-id">
                                                                     <input type="file" name="avatar" class="form-control">
+                                                                    <hr>
+                                                                    <b class="profile-coin"></b>
                                                                 </div>
                                                             </div>
                                                             <div class="text-center text-sm-right">

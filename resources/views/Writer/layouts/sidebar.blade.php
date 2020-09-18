@@ -67,6 +67,12 @@
                                 <p>Thêm mới bài viết</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{Route('writer.show.post')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Chỉnh sửa bài viết</p>
+                            </a>
+                        </li>
 
 
 

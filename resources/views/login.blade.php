@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
     <title>Đăng nhập</title>
+    <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/png" >
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -103,7 +104,7 @@
     <div class="container">
 
         <div class="main">
-            <div class="img"><a href="{{route('home')}}"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" width="70px" height="70px"></a></div>
+            <div class="img"><a href="{{route('home')}}"><img src="logo.png" alt="" width="70px" height="70px"></a></div>
             <div class="intro"><p>Đăng nhập MyLearn</p></div>
                 @if(session('login.failed'))
                 <div class="alert alert-danger" role="alert">

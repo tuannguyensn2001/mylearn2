@@ -1,8 +1,10 @@
 
 
 
-@extends('layouts_page.main');
-
+@extends('layouts_page.main')
+@section('title')
+{{$posts->title}}
+@endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/blog_single.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/blog_single_responsive.css')}}" type="text/css">
@@ -119,53 +121,50 @@
             <div class="row similar_posts">
 
                 <!-- Blog Post -->
+                @foreach($relatedPost as $index)
                 <div class="col-lg-6">
                     <div class="blog_post">
-                        <div class="blog_image" style="background-image:url(images/blog_7.jpg)"></div>
+                        <div class="blog_image" style="background-image:url({{asset($index->thumbnail)}})">
+
+                        </div>
                         <div class="blog_title_container">
-                            <div class="blog_post_category"><a href="#">travel</a></div>
-                            <div class="blog_post_title"><a href="blog_single.html">Design Better Forms</a></div>
+                            <div class="blog_post_category"><a href="#">{{$index->category}}</a></div>
+                            <div class="blog_post_title"><a href="/danh-sach-bai-viet/{{$index->slug}}">{{$index->title}}</a></div>
                             <div class="blog_post_text">
-                                <p>Whether it is a signup flow, a multi-view stepper, or a monotonous data entry interface, forms are one of the most important components of digital product design.</p>
+                                <p>{{$index->description}}</p>
                             </div>
                             <div class="read_more"><a href="blog_single.html">Read More <img src="images/right.png" alt=""></a></div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+
 
                 <!-- Blog Post -->
-                <div class="col-lg-6">
-                    <div class="blog_post">
-                        <div class="blog_image" style="background-image:url(images/blog_8.jpg)"></div>
-                        <div class="blog_title_container">
-                            <div class="blog_post_category"><a href="#">travel</a></div>
-                            <div class="blog_post_title"><a href="blog_single.html">Art Helps Healing</a></div>
-                            <div class="blog_post_text">
-                                <p>Whether it is a signup flow, a multi-view stepper, or a monotonous data entry interface, forms are one of the most important components of digital product design.</p>
-                            </div>
-                            <div class="read_more"><a href="blog_single.html">Read More <img src="images/right.png" alt=""></a></div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="row register">
                 <div class="col-lg-6 offset-lg-3">
-                    <div class="register_form_title">Post a Comment</div>
+                    <div class="register_form_title">Để lại bình luận của bạn</div>
                     <div class="register_form_container">
-                        <form action="#" id="register_form" class="register_form">
+                        <form action="{{route('create.comment')}}" id="register_form" class="register_form" method="post">
+                            @csrf
                             <div class="row register_row">
                                 <div class="col-lg-6 register_col">
-                                    <input type="text" class="form_input" placeholder="Name" required="required">
+                                    <div><label for=""><b>Tên</b></label></div>
+                                    <input type="text" class="form_input"  required="required" name="name">
                                 </div>
                                 <div class="col-lg-6 register_col">
-                                    <input type="email" class="form_input" placeholder="Email" required="required">
+                                    <div><label for=""><b>Email</b></label></div>
+                                    <input type="email" class="form_input"  required="required" name="email">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea class="form_input form_text" placeholder="Comment" required="required"></textarea>
+                                    <div><label for=""><b>Bình luận</b></label></div>
+                                    <textarea class="form_input form_text"  required="required" name="comment"></textarea>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="form_button trans_200">post a comment</button>
+                                    <button type="submit" class="form_button trans_200">Đăng bình luận</button>
                                 </div>
                             </div>
                         </form>
@@ -175,53 +174,26 @@
 
             <div class="row comments">
                 <div class="col-lg-6 offset-lg-3">
-                    <div class="comments_title">Comments <span>(12)</span></div>
+                    <div class="comments_title">Bình luận <span>({{$comment->count()}})</span></div>
                     <div class="comments_container">
                         <ul class="comments_list">
+                            @foreach($comment as $index)
                             <li class="comment">
                                 <div class="comment_content">
                                     <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                        <div class="comment_image"><div><img src="images/blog_author.jpg" alt=""></div></div>
+                                        <div class="comment_image"><div><img src="{{asset('upload/users/avatar/default.png')}}" alt=""></div></div>
                                         <div class="comment_info">
-                                            <div class="comment_name"><a href="#">Sarah Parker</a></div>
-                                            <div class="comment_time">Sep 29, 2017 at 9:48 am</div>
+                                            <div class="comment_name"><a href="#">{{$index->name}}</a></div>
+                                            <div class="comment_time">{{$index->created_at}}</div>
                                         </div>
                                     </div>
                                     <div class="comment_text">
-                                        <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum.</p>
+                                        <p>{{$index->comment}}</p>
                                     </div>
                                 </div>
-                                <ul>
-                                    <li class="comment">
-                                        <div class="comment_content">
-                                            <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                                <div class="comment_image"><div><img src="images/blog_author.jpg" alt=""></div></div>
-                                                <div class="comment_info">
-                                                    <div class="comment_name"><a href="#">Sarah Parker</a></div>
-                                                    <div class="comment_time">Sep 29, 2017 at 9:48 am</div>
-                                                </div>
-                                            </div>
-                                            <div class="comment_text">
-                                                <p>Sed imperdiet ante quis felis tempor hendrerit.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+
                             </li>
-                            <li class="comment">
-                                <div class="comment_content">
-                                    <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                        <div class="comment_image"><div><img src="images/blog_author.jpg" alt=""></div></div>
-                                        <div class="comment_info">
-                                            <div class="comment_name"><a href="#">Sarah Parker</a></div>
-                                            <div class="comment_time">Sep 29, 2017 at 9:48 am</div>
-                                        </div>
-                                    </div>
-                                    <div class="comment_text">
-                                        <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum.</p>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="comments_more">

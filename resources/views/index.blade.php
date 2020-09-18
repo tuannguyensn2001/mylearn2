@@ -1,10 +1,26 @@
 
 
+@extends('layouts_page.main')
 
-@extends('layouts_page.main');
+
 
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/main_styles.css')}}" type="text/css">
+    <style>
+        .home{
+           height: 1000px;
+        }
+        .background{
+         margin-top: -70px;
+        }
+        .blog_category_image{
+            width: 165px;
+            height: 60px;
+        }
+    </style>
+@endsection
+@section('title')
+        MyLearn - Học lập trình dễ dàng
 @endsection
 
 @section('content')
@@ -44,12 +60,12 @@
     <!-- Home -->
 
     <div class="home">
-        <div class="home_background" style="background-image: url('https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); opacity: 0.6"></div>
+        <div class="home_background" style="background-image: url('https://images.pexels.com/photos/3888151/pexels-photo-3888151.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')"></div>
         <div class="home_content">
             <div class="container">
-                <div class="row">
+                <div class="row background">
                     <div class="col text-center">
-                        <h1 class="home_title" style="color:#041621">Học lập trình với MyLearn</h1>
+                        <h1 class="home_title" style="color:#e8e8e8">Học lập trình với MyLearn</h1>
                         <div class="home_button trans_200"><a href="/danh-sach-khoa-hoc">bắt đầu ngay !</a></div>
                     </div>
                 </div>
@@ -68,7 +84,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="section_title text-center">Popular Online Courses</h2>
+                    <h2 class="section_title text-center">Các khóa học nổi bật </h2>
                 </div>
             </div>
             <div class="row courses_row">
@@ -93,7 +109,7 @@
                         <div class="course_footer d-flex flex-row align-items-center justify-content-start">
                             <div class="course_students"><i class="fa fa-user" aria-hidden="true"></i><span>{{$index->count}}</span></div>
                             <div class="course_rating ml-auto"><i class="fa fa-star" aria-hidden="true"></i><span>4,5</span></div>
-                            <div class="course_mark course_free trans_200"><a href="#">Free</a></div>
+                            <div class="course_mark course_free trans_200"><a href="#">{{$index->price}}</a></div>
                         </div>
                     </div>
                 </div>
@@ -105,51 +121,7 @@
         </div>
     </div>
 
-    <!-- Instructors -->
 
-    <div class="instructors">
-        <div class="instructors_background" style="background-image:url(images/instructors_background.png)"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2 class="section_title text-center">The Best Tutors in Town</h2>
-                </div>
-            </div>
-            <div class="row instructors_row">
-
-                <!-- Instructor -->
-                @foreach($instructor as $index)
-                <div class="col-lg-4 instructor_col">
-                    <div class="instructor text-center">
-                        <div class="instructor_image_container">
-                            <div class="instructor_image"><img src="{{asset($index->avatar)}}" alt=""></div>
-                        </div>
-                        <div class="instructor_name"><a href="instructors.html">{{$index->name}}</a></div>
-                        <div class="instructor_title">Teacher</div>
-                        <div class="instructor_text">
-                            <p>{{$index->about}}</p>
-                        </div>
-                        <div class="instructor_social">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Register -->
 
     <div class="register">
         <div class="container">
@@ -159,23 +131,23 @@
 
                 <div class="col-lg-6">
                     <div class="register_form_container">
-                        <div class="register_form_title">Courses For Free</div>
+                        <div class="register_form_title">Nhận thông tin về các khóa học khuyến mãi</div>
                         <form action="#" id="register_form" class="register_form">
                             <div class="row register_row">
                                 <div class="col-lg-6 register_col">
-                                    <input type="text" class="form_input" placeholder="Name" required="required">
+                                    <input type="text" class="form_input" placeholder="Họ tên" required="required">
                                 </div>
                                 <div class="col-lg-6 register_col">
                                     <input type="email" class="form_input" placeholder="Email" required="required">
                                 </div>
                                 <div class="col-lg-6 register_col">
-                                    <input type="tel" class="form_input" placeholder="Phone">
+                                    <input type="tel" class="form_input" placeholder="SĐT">
                                 </div>
                                 <div class="col-lg-6 register_col">
-                                    <input type="url" class="form_input" placeholder="Site">
+                                    <input type="url" class="form_input" placeholder="Địa chỉ">
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="form_button trans_200">get it now</button>
+                                    <button type="submit" class="form_button trans_200">Nhận thông tin</button>
                                 </div>
                             </div>
                         </form>
@@ -186,9 +158,10 @@
 
                 <div class="col-lg-6">
                     <div class="register_timer_container">
-                        <div class="register_timer_title">Register Now</div>
+                        <div class="register_timer_title">Đăng ký ngay </div>
                         <div class="register_timer_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor.</p>
+
+
                         </div>
                         <div class="timer_container">
                             <ul class="timer_list">
@@ -216,72 +189,24 @@
                 <!-- Blog Left -->
                 <div class="col-lg-6">
                     <div class="blog_left">
-                        <div class="blog_title">From Our Blog</div>
+                        <div class="blog_title">Blog của chúng tôi</div>
                         <div class="blog_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor.</p>
+                            <p>Ghé thăm blog để đọc những thông tin về công nghệ, chia sẻ kinh nghiệm</p>
                         </div>
                         <div class="blog_categories">
                             <div class="row categories_row">
 
-                                <!-- Category -->
+                               @foreach($category as $index)
                                 <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
+                                    <a href="/danh-sach-bai-viet?category={{$index->name}}">
                                         <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_1.jpg" alt=""></div>
-                                            <div class="blog_category_title">travel</div>
+                                            <div class="blog_category_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
+                                            <div class="blog_category_title">{{$index->name}}</div>
                                         </div>
                                     </a>
                                 </div>
+                                @endforeach
 
-                                <!-- Category -->
-                                <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
-                                        <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_2.jpg" alt=""></div>
-                                            <div class="blog_category_title">languages</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!-- Category -->
-                                <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
-                                        <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_3.jpg" alt=""></div>
-                                            <div class="blog_category_title">cultures</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!-- Category -->
-                                <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
-                                        <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_4.jpg" alt=""></div>
-                                            <div class="blog_category_title">fashion</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!-- Category -->
-                                <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
-                                        <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_5.jpg" alt=""></div>
-                                            <div class="blog_category_title">cooking</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!-- Category -->
-                                <div class="col-md-4 blog_category_col">
-                                    <a href="blog.html">
-                                        <div class="blog_category">
-                                            <div class="blog_category_image"><img src="images/blog_6.jpg" alt=""></div>
-                                            <div class="blog_category_title">hobbies</div>
-                                        </div>
-                                    </a>
-                                </div>
 
                             </div>
                         </div>
@@ -292,12 +217,12 @@
 
                 <div class="col-lg-6">
                     <div class="blog_right">
-                        <div class="blog_image" style="background-image:url(images/blog_7.jpg)"></div>
+                        <div class="blog_image" style="background-image:url({{asset($post->thumbnail)}})"></div>
                         <div class="blog_title_container">
-                            <div class="blog_right_category"><a href="#">travel</a></div>
-                            <div class="blog_right_title"><a href="blog_single.html">Design Better Forms</a></div>
+                            <div class="blog_right_category"><a href="#">{{$post->category}}</a></div>
+                            <div class="blog_right_title"><a href="">{{$post->title}}</a></div>
                             <div class="blog_right_text">
-                                <p>Whether it is a signup flow, a multi-view stepper, or a monotonous data entry interface, forms are one of the most important components of digital product design.</p>
+                                <p>{{$post->description}}</p>
                             </div>
                             <div class="read_more"><a href="blog_single.html">Read More <img src="images/right.png" alt=""></a></div>
                         </div>
@@ -313,4 +238,24 @@
 
 @section('js')
     <script src="{{asset('home/js/custom.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url:'http://testlaravel.com/api/danh-sach-khoa-hoc',
+                type:'get',
+
+                success: function(data){
+                    console.log(data);
+                },
+                error:error=>console.log(error),
+            })
+        })
+    </script>
     @endsection

@@ -53,6 +53,7 @@ class UserController extends Controller
                }
 
 
+           $request->has('coin') ? $user->coin=$request->coin : null;
            $user->name=$request->name;
            $user->work_place=$request->work_place;
            $user->email=$request->email;
