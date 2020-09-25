@@ -8,8 +8,8 @@
    Khóa học {{$course->name}}
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('home/styles/course.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('home/styles/course_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{secure_asset('home/styles/course.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{secure_asset('home/styles/course_responsive.css')}}" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <style>
         .comment{
@@ -155,7 +155,7 @@
                                     @foreach($mentor as $index)
                                     <div class="col-lg-4 col-md-6">
                                         <div class="instructor d-flex flex-row align-items-center justify-content-start">
-                                            <div class="instructor_image"><div><img src="{{asset($index->avatar)}}" alt=""></div></div>
+                                            <div class="instructor_image"><div><img src="{{secure_asset($index->avatar)}}" alt=""></div></div>
                                             <div class="instructor_content">
                                                 <div class="instructor_name"><a href="instructors.html">{{$index->name}}</a></div>
                                                 <div class="instructor_title">Teacher</div>
@@ -220,7 +220,7 @@
 
                                                         <ul>
                                                             <li class="d-flex flex-row align-items-center justify-content-start">
-                                                                <i class="fa fa-video-camera" aria-hidden="true"></i><span>Video bài giảng <a href="{{asset("api/danh-sach-bai-giang/$index->slug")}}" class="view" >Xem</a></span>
+                                                                <i class="fa fa-video-camera" aria-hidden="true"></i><span>Video bài giảng <a href="{{secure_asset("api/danh-sach-bai-giang/$index->slug")}}" class="view" >Xem</a></span>
                                                             </li>
 
 
@@ -266,7 +266,7 @@
                                 <div class="review">
                                     <div class="review_title_container d-flex flex-row align-items-start justify-content-start">
                                         <div class="review_title d-flex flex-row align-items-center justify-content-center">
-                                            <div class="review_author_image"><div><img src="{{asset($index->avatar)}}" alt="" width="40" height="40"></div></div>
+                                            <div class="review_author_image"><div><img src="{{secure_asset($index->avatar)}}" alt="" width="40" height="40"></div></div>
                                             <div class="review_author">
                                                 <div class="review_author_name"><a href="#">{{$index->username}}</a></div>
                                                 <div class="review_date">{{$index->created_at}}</div>
@@ -283,7 +283,7 @@
                                 @if($checkUserHaveCourse)
                                <div class="review d-flex justify-content-between">
                                    <div class="img" >
-                                       <img src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="" >
+                                       <img src="{{secure_asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="" >
                                    </div>
                                    <div class="comment d-flex flex-column-reverse " >
                                        <form action="/khoa-hoc/review" method="post">
@@ -312,7 +312,7 @@
 
                                 @foreach($members as $index)
                                 <div class="member">
-                                    <div class="member_image"><img src="{{asset($index->avatar)}}" alt="" width="80" height="80"></div>
+                                    <div class="member_image"><img src="{{secure_asset($index->avatar)}}" alt="" width="80" height="80"></div>
                                     <div class="member_title"><a href="#">{{$index->name}}</a></div>
                                 </div>
                                 @endforeach
@@ -425,9 +425,9 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
-    <script src="{{asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
-    <script src="{{asset('home/js/course.js')}}"></script>
+    <script src="{{secure_asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
+    <script src="{{secure_asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
+    <script src="{{secure_asset('home/js/course.js')}}"></script>
     <script>
         $(document).ready(function(){
             $.ajaxSetup({

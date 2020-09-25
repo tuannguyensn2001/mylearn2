@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here"/>
-    <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/png" >
+    <link rel="shortcut icon" href="{{secure_asset('logo.png')}}" type="image/png" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
-    <link rel="stylesheet" href="{{asset('/home/style.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('/home/style.css')}}">
     <title>{{$lesson->name}}</title>
     <style>
         .logo_text{
@@ -92,7 +92,7 @@
                                 hỏi đáp</h4>
 
                             <div class="my-comment d-flex">
-                                <img src="{{asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
+                                <img src="{{secure_asset(\Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="">
                                 <div>
                                     <form action="/khoa-hoc/binh-luan" method="post">
                                         @csrf
@@ -113,7 +113,7 @@
                             <div class="comment">
                                 @foreach($list_comment['comment'] as $index)
                                 <div class="other-comment d-flex">
-                                    <img src="{{asset($index->avatar)}}" alt="">
+                                    <img src="{{secure_asset($index->avatar)}}" alt="">
                                     <div>
                                         <div>
                                             <div class="other-comment-username"><p>{{$index->name}}</p></div>
@@ -166,7 +166,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 <script src="https://cdn.plyr.io/3.6.2/plyr.polyfilled.js"></script>
-<script src='{{asset('/home/scripts.js')}}'></script>
+<script src='{{secure_asset('/home/scripts.js')}}'></script>
 <script>
 
    $(document).ready(function(){

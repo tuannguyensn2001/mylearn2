@@ -6,8 +6,8 @@
     Blog MyLearn
     @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('home/styles/blog.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('home/styles/blog_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{secure_asset('home/styles/blog.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{secure_asset('home/styles/blog_responsive.css')}}" type="text/css">
     <style>
         .blog_category_image{
             width: 165px;
@@ -81,7 +81,7 @@
                 <div class="col-xl-2 col-lg-4 col-md-6 blog_category_col">
                     <a href="?category={{$index->slug}}">
                         <div class="blog_category">
-                            <div class="blog_category_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
+                            <div class="blog_category_image"><img src="{{secure_asset($index->thumbnail)}}" alt=""></div>
                             <div class="blog_category_title">{{$index->name}}</div>
                         </div>
                     </a>
@@ -123,7 +123,7 @@
 
 
 @section('js')
-    <script src="{{asset('home/js/blog.js')}}"></script>
+    <script src="{{secure_asset('home/js/blog.js')}}"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const category_slug = urlParams.get('category');

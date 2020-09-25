@@ -237,7 +237,7 @@
 
 
 @section('js')
-    <script src="{{asset('home/js/custom.js')}}"></script>
+    <script src="{{secure_asset('home/js/custom.js')}}"></script>
 
     <script>
         $(document).ready(function(){
