@@ -99,8 +99,14 @@ Route::group(["prefix"=>"admin",'middleware'=>'checkAdmin'],function (){
     Route::get('danh-sach-bai-viet','AdminPostController@index')->name('list.post');
     Route::get('danh-sach-bai-viet/reject','AdminPostController@reject')->name('list.reject.post');
     Route::get('danh-sach-bai-viet/{slug}','AdminPostController@details');
+
+    //Transcation
+    Route::get('/danh-sach-giao-dich','AdminTransactionController@index')->name('list.transaction');
 });
+
+
 Route::get('/api/danh-sach-bai-giang/{slug}','LessonController@showLesson')->middleware(['checkUserLogin','checkUserHaveCourse']);
+
 //Client
 
 
@@ -108,9 +114,11 @@ Route::get('/','HomePageController@index')->name('home');
 
 //Get Course
 Route::get('/khoa-hoc/{slug}','CourseController@index');
+Route::get('/khoa-hoc/{course}/{lesson}','LessonController@index')->middleware('checkUserHaveCourse');
+Route::post('/khoa-hoc/binh-luan','LessonController@addComment');
 Route::get('/danh-sach-khoa-hoc/load-more','CourseController@loadMore')->name('load.more.course');
 Route::post('/khoa-hoc/mua-khoa-hoc','CourseController@buy')->name('buy.course');
-Route::get('/lesson','CourseController@lesson');
+
 
 //Login,signup
 Route::get('/dang-nhap','HomePageController@loginPage')->name('login');

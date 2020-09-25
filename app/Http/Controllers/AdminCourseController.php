@@ -92,11 +92,22 @@ class AdminCourseController extends Controller
 
        public function edit(Request $request)
        {
+           $array_request=$request->toArray();
+           $array_advantage=[];
+           foreach($array_request as $key=>$value){
+               if (str_contains($key,'advantage') && $value != ''){
+                   $array_advantage[]=$value;
+               }
+           }
+
+
+
            $validator=Validator::make($request->all(),[
                'name'=>'bail|required',
                'description'=>'bail|required',
                'category_id'=>'bail|numeric',
                'status_id'=>'bail|numeric',
+               'price'=>'numeric',
            ]);
            if (!$validator->fails()){
 
@@ -119,10 +130,11 @@ class AdminCourseController extends Controller
                     $course->description=$description;
                     $course->slug=Str::slug($name,'-');
                     $course->category_id=$category_id;
+                    $course->advantage=json_encode($array_advantage,JSON_UNESCAPED_UNICODE);
                     $course->save();
-
+               return redirect()->route('viewCourse')->with('edit.done','Chỉnh sửa khóa học thành công');
            }
-           return redirect()->route('viewCourse');
+           return redirect()->route('viewCourse')->with('edit.failed','Chỉnh sửa khóa học không thành công');
        }
 
 

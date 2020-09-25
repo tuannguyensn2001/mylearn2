@@ -8,7 +8,7 @@ $course=$course->chunk(4);
 ?>
 @extends('Admin.layouts.main')
 @section('title')
-    Xem khóa học
+    Danh sách mentor
 @endsection
 @section('css')
     <style>
@@ -48,15 +48,14 @@ $course=$course->chunk(4);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Danh sách mentor</h1>
 
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-
+                        <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                        <li class="breadcrumb-item active">Danh sách mentor</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -84,7 +83,7 @@ $course=$course->chunk(4);
                     {{session('edit.failed')}}
                 </div>
             @endif
-        <table class="table table-borderless">
+        <table class="table ">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -142,8 +141,8 @@ $course=$course->chunk(4);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
                         </div>
                         </form>
                     </div>
@@ -154,7 +153,7 @@ $course=$course->chunk(4);
             <div class="modal-dialog modal-lg   " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa người dùng</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa mentor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -182,9 +181,9 @@ $course=$course->chunk(4);
                                                             </div>
                                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                                                                    <p class="mb-0">@johnny.s</p>
-                                                                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"></h4>
+                                                                    <p class="mb-0"></p>
+
 
 
                                                                     <div class="custom-file">
@@ -196,7 +195,7 @@ $course=$course->chunk(4);
                                                                 </div>
                                                                 <div class="text-center text-sm-right">
                                                                     <span class="badge badge-secondary">administrator</span>
-                                                                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -248,7 +247,7 @@ $course=$course->chunk(4);
 
                                                                 <div class="row">
                                                                     <div class="col d-flex justify-content-end">
-                                                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                                        <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
                                                                     </div>
                                                                 </div>
 

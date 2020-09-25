@@ -1,13 +1,28 @@
 
 @extends('Admin.layouts.main')
 @section('title')
-    Xem khóa học
+  Danh sách khóa học
 @endsection
 @section('css')
     <style>
         img{
             width: 200px;
             height: 200px;
+        }
+        .menu > div{
+            margin-left: 10px;
+            margin-top: 20px;
+
+            cursor: pointer;
+        }
+        .menu-active{
+            border-bottom: 1px solid blue;
+        }
+        .modal-body{
+            display: none;
+        }
+        .menu-content-active{
+            display: block;
         }
     </style>
 @endsection
@@ -17,12 +32,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark"></h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                        <li class="breadcrumb-item active">Danh sách khóa học</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -30,12 +45,23 @@
     </div>
 
     <section class="content">
-        <table class="table table-borderless">
+        @if(session('edit.done'))
+            <div class="alert alert-success" role="alert">
+                {{session('edit.done')}}
+            </div>
+        @endif
+        @if(session('edit.failed'))
+            <div class="alert alert-danger" role="alert">
+                {{session('edit.failed')}}
+            </div>
+        @endif
+        <table class="table ">
             <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Chủ đề</th>
+                <th scope="col">Giá</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -45,9 +71,11 @@
                 <th scope="row">{{$index->id}}</th>
                 <td>{{$index->name}}</td>
                 <td>{{$index->category}}</td>
+                <td>{{$index->price}} Coin</td>
                 <td>
                     <a href="" class="btn btn-primary edit" data-toggle="modal" data-target="#modal-lg" course-id="{{$index->id}}">SỬA</a>
                     <a href="" class="btn btn-danger">XÓA</a>
+
 
                 </td>
             </tr>
@@ -60,15 +88,21 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Large Modal</h4>
+                        <h4 class="modal-title">Chỉnh sửa khóa học</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="d-flex menu">
+                        <div class="menu-1 menu-title menu-active" number-menu="1"><p>Thông tin chung</p></div>
+                        <div class="menu-2 menu-title" number-menu="2"><p>Thông tin chi tiết</p></div>
+
+                    </div>
+
                     <form action="{{route('editCourse')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="id" value="" class="info-id" hidden>
-                    <div class="modal-body">
+                    <div class="modal-body menu-content-1 menu-content-active">
                         <div class="form-group">
                             <label for="">Tên khóa học</label>
                             <input type="text" name="name" class="form-control info-name"  >
@@ -114,9 +148,16 @@
 
 
                     </div>
+
+                        <div class="modal-body menu-content-2">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn plus-advantage"><i class="fa fa-plus" ></i></button>
+                            </div>
+
+                        </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
 
                     </div>
                     </form>
@@ -143,6 +184,7 @@
             });
             $('.edit').click(function () {
                 let id=$(this).attr('course-id');
+                    $('.menu-content-2').empty();
                     $.ajax({
                         type:'POST',
                         url: '{{route('showCourse')}}',
@@ -151,8 +193,11 @@
                         },
 
                         success: function(data){
+                            let advantage=JSON.parse(data['course']['advantage']);
+
+
                             let course=data['course'];
-                            console.log(course);
+
                             $('.info-name').val(course['name']);
                             $('.info-id').val(course['id']);
                             $('.info-description').val(course['description']);
@@ -160,6 +205,15 @@
                             $('#category-'+course['category_id']).attr('selected','selected')
                             $('.info-thumbnail').attr('src',course['thumbnail']);
                             $('#course-status-'+course['status_id']).attr('checked',true);
+                            advantage.forEach((item,index)=>{
+                                let count=index+1;
+                                let element=` <div class="form-group">
+                               <label for="">Lợi ích ${count}</label>
+                               <input type="text" class="form-control advantage" name="advantage-${count}" value='${item}'>
+                           </div>`;
+
+                                $('.menu-content-2').append(element);
+                            });
                         }
                     })
 
@@ -171,6 +225,22 @@
                     alert("Giá khóa học không hợp lệ");
                 }
             });
+            $('.menu-title').click(function(){
+                $('.menu-title').removeClass('menu-active');
+                $('.modal-body').removeClass('menu-content-active');
+                $(this).addClass('menu-active');
+                let number = $(this).attr('number-menu');
+                $('.menu-content-'+number).addClass('menu-content-active');
+            })
+            $('.plus-advantage').click(function(event){
+                event.preventDefault();
+                let count_advantage=document.querySelectorAll('.advantage').length+1;
+                let element=`  <div class="form-group">
+                               <label for="">Lợi ích ${count_advantage}</label>
+                               <input type="text" class="form-control advantage" name="advantage-${count_advantage}">
+                           </div>`
+                $('.menu-content-2').append(element);
+            })
         })
     </script>
 @endsection

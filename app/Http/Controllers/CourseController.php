@@ -29,6 +29,12 @@ class CourseController extends Controller
       $mentor=$this->getInstructors($course_id);
       $lesson=$this->getLesson($course_id);
       $check= $this->checkUserHaveCourse($course_id);
+      if ($course->advantage != null){
+          $course->advantage=json_decode($course->advantage);
+          $course->advantage=array_chunk($course->advantage,2);
+      }
+
+
 
       $relationCourse=$this->getCourseRelationship($course->category_id,$course_id);
         $this->getMembers($course_id);
@@ -171,6 +177,8 @@ class CourseController extends Controller
             ->join(DB::raw('(SELECT COUNT(user_id) as count,course_id FROM usertocourse WHERE type=1 GROUP BY course_id) as count'),'count.course_id','=','courses.id')
             ->where('courses.category_id','=',$category_id)
             ->get();
+
+
         return view('course_filter',[
             'course'=>$course,
             'category_name'=>$category->name,
@@ -234,6 +242,7 @@ class CourseController extends Controller
                 $newRelation->course_id = $course_id;
                 $newRelation->user_id = $user_id;
                 $newRelation->is_active = 1;
+                $newRelation->notes="Người dùng mua";
                 $newRelation->type=1;
                 $newRelation->save();
             }

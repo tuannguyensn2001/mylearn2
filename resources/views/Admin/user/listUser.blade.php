@@ -8,7 +8,7 @@ $course=$course->chunk(4);
 ?>
 @extends('Admin.layouts.main')
 @section('title')
-    Xem khóa học
+    Danh sách người dùng
 @endsection
 @section('css')
     <style>
@@ -48,15 +48,14 @@ $course=$course->chunk(4);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Danh sách người dùng</h1>
 
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-
+                        <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                        <li class="breadcrumb-item active">Danh sách người dùng</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -74,7 +73,7 @@ $course=$course->chunk(4);
             {{session('edit.failed')}}
         </div>
             @endif
-        <table class="table table-borderless">
+        <table class="table ">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -134,9 +133,9 @@ $course=$course->chunk(4);
                                                             </div>
                                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                                                 <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                                                                    <p class="mb-0">@johnny.s</p>
-                                                                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap profile-html-name"></h4>
+                                                                    <p class="mb-0 profile-html-email"></p>
+
 
 
 
@@ -164,8 +163,8 @@ $course=$course->chunk(4);
 
                                                                 </div>
                                                                 <div class="text-center text-sm-right">
-                                                                    <span class="badge badge-secondary">administrator</span>
-                                                                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                                                                    <span class="badge badge-secondary">Thành viên</span>
+                                                                    <div class="text-muted profile-html-created_at"><small>Tham gia</small></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -375,7 +374,9 @@ $course=$course->chunk(4);
                            }
 
                        })
-
+                        $('.profile-html-name').html(data['name']);
+                        $('.profile-html-email').html(data['email']);
+                        $('.profile-html-created_at').html(data['created_at']);
                         $(".profile-id").val(data['id']);
                         $(".profile-name").val(data['name']);
                         $(".profile-work_place").val(data['work_place']);

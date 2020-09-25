@@ -65,10 +65,10 @@
             border-radius: 50%;
         }
         .course-description{
-            word-break: break-all;
+            word-break: break-word;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
     </style>
@@ -293,7 +293,7 @@
             $(this).addClass("focus");
         });
         $(".user-profile").click(function(){
-
+                $('.auth-course').empty();
                $.ajax({
                    url:'{{route('getUser')}}',
                    method:'post',

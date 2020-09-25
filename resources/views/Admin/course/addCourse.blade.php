@@ -1,5 +1,8 @@
 
     @extends('Admin.layouts.main')
+    @section('title')
+        Thêm mới khóa học
+    @endsection
     @section('css')
         <style>
         section > div form{
@@ -18,8 +21,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                            <li class="breadcrumb-item active">Thêm mới  khóa học</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

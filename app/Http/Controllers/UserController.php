@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Course;
 use App\User;
+use App\UserToCourse;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Http\Request;
@@ -53,7 +54,14 @@ class UserController extends Controller
                }
 
 
-           $request->has('coin') ? $user->coin=$request->coin : null;
+//           $request->has('coin') ? $user->coin=$request->coin : null;
+           if ($request->has('coin')){
+
+               $this->newTransaction($request->coin,$user);
+               $user->coin=$request->coin;
+           }
+
+
            $user->name=$request->name;
            $user->work_place=$request->work_place;
            $user->email=$request->email;
@@ -64,5 +72,24 @@ class UserController extends Controller
        $total=!$validator->fails() && $check;
 
        return $total ? redirect()->back()->with('edit.done','Cập nhật thành công') : redirect()->back()->with('edit.failed','Cập nhật không thành công');
+    }
+
+    public function newTransaction($coin,$user)
+    {
+
+        $id=$user->id;
+        $notes="";
+        if ($user->coin < $coin) $notes="Admin set +";
+        else if ($user->coin > $coin) $notes="Admin set -";
+        if ($user->coin != $coin){
+            $transaction = new UserToCourse();
+            $transaction->user_id=$id;
+            $transaction->is_active=1;
+
+            $transaction->type=1;
+            $transaction->notes=$notes;
+            $transaction->coin= abs($coin-$user->coin);
+            $transaction->save();
+        }
     }
 }

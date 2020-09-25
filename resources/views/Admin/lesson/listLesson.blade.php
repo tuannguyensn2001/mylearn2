@@ -1,7 +1,7 @@
 
 @extends('Admin.layouts.main')
 @section('title')
-    Xem khóa học
+    Danh sách bài giảng
 @endsection
 @section('css')
     <style>
@@ -17,15 +17,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Danh sách bài giảng</h1>
 
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-
+                        <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                        <li class="breadcrumb-item active">Danh sách bài giảng</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -54,7 +53,7 @@
             <option selected>Chọn khóa học</option>
 
         </select>
-        <table class="table table-borderless">
+        <table class="table ">
             <thead>
 
             </thead>
@@ -110,8 +109,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
                 </form>
             </div>
@@ -158,8 +157,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -262,7 +261,7 @@
                         $('.info_lesson_id').val(lesson_current['id']);
                         $('.info_course_name').val(lesson_current['course']);
                         $('.info_lesson_name').val(lesson_current['name']);
-
+                        $('.info_lesson_description').val(lesson_current['description']);
                         $('.info_lesson_video').val(lesson_current['video']);
                         let ready=$('.info_lesson_status')[0];
                         let unready=$('.info_lesson_status')[1];

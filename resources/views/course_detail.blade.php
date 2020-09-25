@@ -1,5 +1,8 @@
 
 
+
+
+
 @extends('layouts_page.main')
 @section('title')
    Khóa học {{$course->name}}
@@ -7,6 +10,7 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/course.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/course_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <style>
         .comment{
             width: 100% !important;
@@ -17,6 +21,18 @@
             border-radius: 50%;
             width: 50px;
             height: 50px;
+        }
+        .fas{
+            padding-top: 4px;
+            color: #f05123;
+        }
+        .content-faqs > p{
+            margin-left: 10px;
+        }
+        .wrapper-faqs > div:first-child{
+           margin-top: 20px;
+        }
+        .wrapper-faqs > div:not(:first-child){
 
         }
     </style>
@@ -79,15 +95,15 @@
     <!-- Intro -->
 
     <div class="intro">
-        <div style="background-image: url('{{asset($course->thumbnail)}}') " class="intro_background parallax-window" data-parallax="scroll"  data-speed="0.8"></div>
+        <div style="background-image: url('https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260}') " class="intro_background parallax-window" data-parallax="scroll"  data-speed="0.8"></div>
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="intro_container d-flex flex-column align-items-start justify-content-end">
-                        <div class="intro_content">
+                        <div class="intro_content" style="background-color:#2e21df">
                             <div class="intro_price">{{$course->price}} Coin</div>
                             <div class="rating_r rating_r_4 intro_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                            <div class="intro_title">{{$course->name}}</div>
+                            <div class="intro_title" style="color: white">{{$course->name}}</div>
                             <div class="intro_meta">
 
                             </div>
@@ -158,43 +174,29 @@
 
                             <!-- FAQs -->
                             <div class="faqs">
-                                <div class="panel_title">FAQs</div>
-                                <div class="accordions">
 
-                                    <div class="elements_accordions">
 
-                                        <div class="accordion_container">
-                                            <div class="accordion d-flex flex-row align-items-center active"><div>Can I just enroll in a single course? I'm not interested in the entire Specializat</div></div>
-                                            <div class="accordion_panel">
-                                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-                                            </div>
+
+
+
+
+                                <div class="panel_title">Bạn sẽ học được gì</div>
+                                <div class="wrapper-faqs">
+                                    @foreach($course->advantage as $index)
+                                    <div class="row">
+                                        @foreach($index as $item)
+                                        <div class="d-flex content-faqs col-lg-6" >
+                                            <i class="fas fa-check fa-1x"></i>
+                                            <p>{{$item}}</p>
                                         </div>
-
-                                        <div class="accordion_container">
-                                            <div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
-                                            <div class="accordion_panel">
-                                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion_container">
-                                            <div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary</div></div>
-                                            <div class="accordion_panel">
-                                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="accordion_container">
-                                            <div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific ord</div></div>
-                                            <div class="accordion_panel">
-                                                <p>Nam egestas lorem ex, sit amet commodo tortor faucibus a. Suspendisse commodo, turpis a dapibus fermentum, turpis ipsum rhoncus massa, sed commodo nisi lectus id ipsum. Sed nec elit vehicula, aliquam neque euismod, porttitor ex. Nam consequat iaculis maximus.</p>
-                                            </div>
-                                        </div>
-
+                                        @endforeach
                                     </div>
+                                 @endforeach
 
                                 </div>
+
                             </div>
+
                         </div>
 
                         <!-- Curriculum -->
@@ -235,11 +237,11 @@
                             </div>
                         </div>
 
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title this-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title this-title" id="exampleModalLabel">Thông báo</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -436,10 +438,7 @@
             $('.view').click(function (event) {
                 $('.this-body .alert-danger').remove();
                 event.preventDefault();
-                $('.bd-example-modal-lg').modal({
-                    backdrop: 'static',
-                    keyboard: false,
-                });
+
                 let url=$(this).attr('href');
                 let element=$(this);
                 let course_id={{$course->id}}
@@ -450,7 +449,8 @@
                         course_id
                     },
                     success: function (data) {
-                        console.log(data);
+
+                        window.location.href+='/'+data;
                         $('.this-body').empty();
                         let name=element.closest('.cur_item_content').children('.cur_item_title').html();
                         $('.this-title').html(name);
@@ -463,6 +463,11 @@
 
                       if (data['status']==403) window.location.href = '{{route('login')}}';
                         else if(data['status']==401) $(".this-body").append('<div class="alert alert-danger" role="alert"> Bạn vui lòng đăng ký khóa học này !</div>');
+                        $('.bd-example-modal-lg').modal({
+                            backdrop: 'static',
+                            keyboard: false,
+                        });
+
                     }
                 })
             })

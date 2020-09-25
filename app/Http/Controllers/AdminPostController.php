@@ -41,8 +41,9 @@ class AdminPostController extends Controller
 
             $review->status=1;
             $review->save();
+            return redirect()->back()->with('check.done','Phê duyệt thành công');
         }
-        return redirect()->back();
+        return redirect()->back()->with('check.failed','Phê duyệt không thành công');
     }
     public function setUnCheck($id)
     {

@@ -30,6 +30,7 @@ class PostController extends Controller
                 ->leftJoin('writers', 'writers.id', '=', 'posts.writer_id')
                 ->where('posts.is_active', '=', '1')
                 ->where('posts.status', '=', '1')
+                ->orderBy('posts.updated_at','desc')
                 ->take(2)
                 ->get();
 

@@ -8,6 +8,8 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('home/styles/courses.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('home/styles/courses_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog_responsive.css')}}" type="text/css">
     <style>
         .course_image img{
             width: 100%;
@@ -29,6 +31,10 @@
         }
         .list-category a:hover{
             color: #0e84b5;
+        }
+        .blog_category_image{
+            width: 150px;
+            height: 60px;
         }
     </style>
 @endsection
@@ -102,10 +108,19 @@
         <div class="row">
             <div class="col">
               <ul class="list-category">
-                  <li><a href="/danh-sach-khoa-hoc">Tất cả</a></li>
-                  @foreach($category as $index)
-                  <li><a href="/danh-sach-khoa-hoc/{{$index->slug}}" >{{$index->name}}</a></li>
-                  @endforeach
+
+
+                      @foreach($category as $index)
+                          <div class="col-xl-2 col-lg-4 col-md-6 blog_category_col">
+                              <a href="/danh-sach-khoa-hoc/{{$index->slug}}">
+                                  <div class="blog_category">
+                                      <div class="blog_category_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
+                                      <div class="blog_category_title">{{$index->name}}</div>
+                                  </div>
+                              </a>
+                          </div>
+                      @endforeach
+
               </ul>
             </div>
         </div>

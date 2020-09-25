@@ -8,22 +8,16 @@
                 <div class="row">
                     <div class="col">
                         <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="top_bar_phone"><span class="top_bar_title">phone:</span>+44 300 303 0266</div>
+                            <div class="top_bar_phone"><span class="top_bar_title">phone:</span>+84 9565910</div>
                             <div class="top_bar_right ml-auto">
 
                                 <!-- Language -->
                                 <div class="top_bar_lang">
-                                    <span class="top_bar_title">site language:</span>
+                                    <span class="top_bar_title">Ngôn ngữ</span>
                                     <ul class="lang_list">
                                         <li class="hassubs">
-                                            <a href="#">English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                            <ul>
-                                                <li><a href="#">Ukrainian</a></li>
-                                                <li><a href="#">Japanese</a></li>
-                                                <li><a href="#">Lithuanian</a></li>
-                                                <li><a href="#">Swedish</a></li>
-                                                <li><a href="#">Italian</a></li>
-                                            </ul>
+                                            <a href="#">Tiếng Việt<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -32,9 +26,9 @@
                                 <div class="top_bar_social">
                                     <span class="top_bar_title social_title">follow us</span>
                                     <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="https://facebook.com/tuannguyensn2001"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="https://github.com/tuannguyensn2001"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -205,7 +199,7 @@
 
                                                             <div class="row">
                                                                 <div class="col d-flex justify-content-end">
-                                                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                                    <button class="btn btn-primary" type="submit">Lưu</button>
                                                                 </div>
                                                             </div>
 

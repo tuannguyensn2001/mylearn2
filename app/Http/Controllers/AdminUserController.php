@@ -55,7 +55,9 @@ class AdminUserController extends Controller
         if ($check == 'true') {
             if ($relation != null ) {
                 $relation->is_active = 1;
+                $relation->notes='Admin set';
                 $relation->save();
+
                 return $relation;
             }
             else {
@@ -64,12 +66,15 @@ class AdminUserController extends Controller
                 $newRelation->course_id = $course_id;
                 $newRelation->user_id = $user_id;
                 $newRelation->is_active = 1;
+
                 $newRelation->type=1;
+                $newRelation->notes="Admin set";
                 $newRelation->save();
             }
         } else{
 
             $relation->is_active = 0;
+            $relation->notes='Admin set';
             $relation->save();
         }
 

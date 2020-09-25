@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/png" >
     <title>@yield('title')</title>
     <base href="{{asset('')}}">
     <!-- Tell the browser to be responsive to screen width -->

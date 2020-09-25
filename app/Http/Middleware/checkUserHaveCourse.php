@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Course;
 use App\UserToCourse;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,14 @@ class checkUserHaveCourse
      */
     public function handle($request, Closure $next)
     {
-        $course_id=$request->course_id;
+        $course_id=null;
+//        $course_id=$request->course_id;
+        if (isset($request->course)){
+            $course_id=Course::where('slug','=',$request->course)->first()->id;
+        } else{
+                    $course_id=$request->course_id;
+
+        }
         $user_id=Auth::user()->id;
         $relation = UserToCourse::query()
             ->where([
@@ -32,7 +40,7 @@ class checkUserHaveCourse
                 ['type','=','1']
             ])
             ->first();
-        return $relation == null ? response('',401) : $next($request);
+        return $relation == null ? response(' ',401) : $next($request);
 
     }
 }

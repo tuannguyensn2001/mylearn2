@@ -1,7 +1,7 @@
 
 @extends('Admin.layouts.main')
 @section('title')
-    Xem khóa học
+    Danh sách chủ đề
 @endsection
 @section('css')
     <style>
@@ -17,14 +17,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Danh sách chủ đề</h1>
 
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="/admin">Trang chính</a></li>
+                        <li class="breadcrumb-item active">Danh sách chủ đề</li>
 
                     </ol>
                 </div><!-- /.col -->
@@ -34,7 +34,7 @@
 
     <section class="content">
 
-        <table class="table table-borderless">
+        <table class="table ">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -74,13 +74,13 @@
                         <input type="text" name="id" value="" class="info-id" hidden>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Tên khóa học</label>
+                                <label for="">Tên danh mục</label>
                                 <input type="text" name="name" class="form-control info-name"  >
                             </div>
                             <div class="form-group ">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="validatedCustomFile" required name="thumbnail">
-                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <label class="custom-file-label" for="validatedCustomFile">Chọn ảnh</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
 
@@ -94,8 +94,8 @@
 
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
 
                         </div>
                     </form>
@@ -119,13 +119,13 @@
 
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Tên khóa học</label>
+                                <label for="">Tên danh mục</label>
                                 <input type="text" name="name" class="form-control "  >
                             </div>
                             <div class="form-group ">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="validatedCustomFile1" required name="thumbnail">
-                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <label class="custom-file-label" for="validatedCustomFile">Chọn ảnh</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
 
@@ -140,8 +140,8 @@
 
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
 
                         </div>
                     </form>
