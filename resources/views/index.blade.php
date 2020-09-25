@@ -5,7 +5,7 @@
 
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('home/styles/main_styles.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{secure_asset('home/styles/main_styles.css')}}" type="text/css">
     <style>
         .home{
            height: 1000px;
