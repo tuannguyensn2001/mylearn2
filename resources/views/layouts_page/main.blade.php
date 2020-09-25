@@ -7,14 +7,14 @@
     <meta name="description" content="Lingua project">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/png" >
-    <link rel="stylesheet" type="text/css" href="{{asset('home/styles/bootstrap4/bootstrap.min.css')}}">
-    <link href="{{asset('home/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{asset('home/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('home/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('home/plugins/OwlCarousel2-2.2.1/animate.css')}}">
+    <link rel="shortcut icon" href="{{secure_asset('logo.png')}}" type="image/png" >
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('home/styles/bootstrap4/bootstrap.min.css')}}">
+    <link href="{{secure_asset('home/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('home/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('home/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('home/plugins/OwlCarousel2-2.2.1/animate.css')}}">
     @yield('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('home/styles/responsive.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('home/styles/responsive.css')}}">
     <style>
 
         .auth{
@@ -253,11 +253,11 @@
     </div>
 </div>
 
-<script src="{{asset('home/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('home/styles/bootstrap4/popper.js')}}"></script>
-<script src="{{asset('home/styles/bootstrap4/bootstrap.min.js')}}"></script>
-<script src="{{asset('home/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
-<script src="{{asset('home/plugins/easing/easing.js')}}"></script>
+<script src="{{secure_asset('home/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{secure_asset('home/styles/bootstrap4/popper.js')}}"></script>
+<script src="{{secure_asset('home/styles/bootstrap4/bootstrap.min.js')}}"></script>
+<script src="{{secure_asset('home/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{secure_asset('home/plugins/easing/easing.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js"></script>
 
