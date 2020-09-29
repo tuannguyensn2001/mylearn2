@@ -68,6 +68,8 @@ class LessonController extends Controller
     }
     public function addComment(Request $request)
     {
+        $user=Auth::user();
+
         $validator=Validator::make($request->all(),[
             'comment'=>'required',
             'lesson_id'=>'numeric'
@@ -78,8 +80,9 @@ class LessonController extends Controller
             $comment->comment=$request->comment;
             $comment->user_id=Auth::user()->id;
             $comment->save();
+            return response()->json(['message'=>'Thêm tin nhắn không thành công','avatar'=>asset(\Illuminate\Support\Facades\Auth::user()->avatar),'name'=>$user->name],201);
         }
-        return redirect()->back();
+        return response()->json(['message'=>'Thêm tin nhắn không thành công'],201);
     }
     public function getComment($lesson_id)
     {
@@ -87,6 +90,7 @@ class LessonController extends Controller
         $comment=Lessoncomment::query()
             ->select('lessoncomments.comment','users.avatar','users.name')
             ->leftJoin('users','users.id','=','lessoncomments.user_id')
+            ->orderBy('lessoncomments.created_at','desc')
             ->where('lessoncomments.lesson_id','=',$lesson_id)
             ->get();
         return ['count'=>$count,'comment'=>$comment];

@@ -6,8 +6,8 @@
 {{$posts->title}}
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{secure_asset('home/styles/blog_single.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{secure_asset('home/styles/blog_single_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog_single.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog_single_responsive.css')}}" type="text/css">
 @endsection
 
 @section('content')
@@ -95,7 +95,7 @@
                         </div>
                         <div class="blog_post_footer d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
                             <div class="blog_post_author d-flex flex-row align-items-center justify-content-start">
-                                <div class="author_image"><div><img src="{{secure_asset($posts->avatar)}}" alt="" width="34" height="34"></div></div>
+                                <div class="author_image"><div><img src="{{asset($posts->avatar)}}" alt="" width="34" height="34"></div></div>
                                 <div class="author_info">
                                     <ul>
                                         <li><a href="#">{{$posts->author}}</a></li>
@@ -124,7 +124,7 @@
                 @foreach($relatedPost as $index)
                 <div class="col-lg-6">
                     <div class="blog_post">
-                        <div class="blog_image" style="background-image:url({{secure_asset($index->thumbnail)}})">
+                        <div class="blog_image" style="background-image:url({{asset($index->thumbnail)}})">
 
                         </div>
                         <div class="blog_title_container">
@@ -181,7 +181,7 @@
                             <li class="comment">
                                 <div class="comment_content">
                                     <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                        <div class="comment_image"><div><img src="{{secure_asset('upload/users/avatar/default.png')}}" alt=""></div></div>
+                                        <div class="comment_image"><div><img src="{{asset('upload/users/avatar/default.png')}}" alt=""></div></div>
                                         <div class="comment_info">
                                             <div class="comment_name"><a href="#">{{$index->name}}</a></div>
                                             <div class="comment_time">{{$index->created_at}}</div>
@@ -207,7 +207,7 @@
 
 
 @section('js')
-    <script src="{{secure_asset('home/js/blog_single.js')}}"></script>
+    <script src="{{asset('home/js/blog_single.js')}}"></script>
     <script>
 
     </script>

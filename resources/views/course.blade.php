@@ -6,10 +6,10 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{secure_asset('home/styles/courses.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{secure_asset('home/styles/courses_responsive.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{secure_asset('home/styles/blog.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{secure_asset('home/styles/blog_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/courses.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/courses_responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('home/styles/blog_responsive.css')}}" type="text/css">
     <style>
         .course_image img{
             width: 100%;
@@ -114,7 +114,7 @@
                           <div class="col-xl-2 col-lg-4 col-md-6 blog_category_col">
                               <a href="/danh-sach-khoa-hoc/{{$index->slug}}">
                                   <div class="blog_category">
-                                      <div class="blog_category_image"><img src="{{secure_asset($index->thumbnail)}}" alt=""></div>
+                                      <div class="blog_category_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
                                       <div class="blog_category_title">{{$index->name}}</div>
                                   </div>
                               </a>
@@ -136,7 +136,7 @@
             @foreach($course as $index)
                 <div class="col-lg-4 course_col">
                     <div class="course">
-                        <div class="course_image"><img src="{{secure_asset($index->thumbnail)}}" alt=""></div>
+                        <div class="course_image"><img src="{{asset($index->thumbnail)}}" alt=""></div>
                         <div class="course_body">
                             <div class="course_title"><a href="/khoa-hoc/{{$index->slug}}">{{$index->name}}</a></div>
                             <div class="course_info">
@@ -174,9 +174,9 @@
 
 @endsection
 @section('js')
-    <script src="{{secure_asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
-    <script src="{{secure_asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
-    <script src="{{secure_asset('home/js/courses.js')}}"></script>
+    <script src="{{asset('home/plugins/parallax-js-master/parallax.min.js')}}"></script>
+    <script src="{{asset('home/plugins/progressbar/progressbar.min.js')}}"></script>
+    <script src="{{asset('home/js/courses.js')}}"></script>
     <script>
         let filter=['Giá tăng dần','Giá giảm dần','Số học viên tăng dần','Số học viên giảm dần'];
         function removeCourse(){

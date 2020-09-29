@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     function hightlight(){
         let child = document.querySelectorAll('.child-lesson');
         let slug=window.location.href.split('/')[5];
@@ -32,10 +33,36 @@ $(document).ready(function(){
     // })
     $(".my-comment-cancel").click(function(){
         $('.wrapper-my-comment-action').css('display','none');
+
     })
     $('.my-comment-comment').click(function(){
-        console.log("hello");
-        $('form').submit();
+
+        let comment=$("input[name='comment']").val();
+        let lesson_id=$("input[name='lesson_id']").val();
+
+        $.ajax({
+            url: '/khoa-hoc/binh-luan',
+            type: 'post',
+            data:{
+                lesson_id,comment
+            },
+            success:function(data){
+                    $("input[name='comment']").val('');
+                    let first = document.querySelector(".other-comment");
+                    let element=` <div class="other-comment d-flex">
+                                        <img src="${data['avatar']}" alt="">
+                                        <div>
+                                            <div>
+                                                <div class="other-comment-username"><p>${data['name']}</p></div>
+                                                <div class="other-comment-comment"><p>${comment}</p></div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+            $(".comment").prepend(element);
+
+            }
+        })
+
     })
     $('.hide-list-lesson').click(function(event){
         event.preventDefault();

@@ -15,6 +15,10 @@ class ReviewController extends Controller
                 'course_id'=>'numeric',
                 'review'=>'required'
             ]);
+
+
+
+
             if (!$validator->fails()){
                 $review = new Review();
                 $review->user_id=Auth::user()->id;
@@ -22,10 +26,14 @@ class ReviewController extends Controller
                 $review->reviews=$request->review;
                 $review->status=-1;
                 $review->save();
+                return response()->json(['message'=>'Bình luận của bạn đang chờ được phê duyệt'],200);
             }
-            
 
-            
-            return redirect()->back();
+
+        return response()->json(['message'=>'Bình luận của bạn không hợp lệ'],403);
+
+
+
+
     }
 }

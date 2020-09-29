@@ -86,9 +86,11 @@ class CourseController extends Controller
         return Review::query()
           ->select('reviews.*','users.username','users.avatar')
             ->leftJoin('users','reviews.user_id','=','users.id')
+            ->orderBy('reviews.created_at')
             ->where('users.status','=','1')
             ->where('reviews.course_id','=',$id)
             ->where('reviews.status','=','1')
+
             ->get();
     }
     public function getInstructors($course_id)
