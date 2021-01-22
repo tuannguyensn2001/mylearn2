@@ -79,8 +79,8 @@
                                     </a>
                                 </div>
                             @else
-                            <div class="  " >
-                                <a href="{{route('login')}}">Đăng nhập</a>
+                            <div class=" user " >
+                                <a href="{{route('login')}}"><i class="fas fa-user" aria-hidden="true"></i></a>
                             </div>
                             @endif
 

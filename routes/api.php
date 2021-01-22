@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Api\CourseAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/danh-sach-bai-giang','AdminLessonController@getAll')->name('api.getLesson');
 
-Route::get('/danh-sach-khoa-hoc','CourseController@get');
+Route::get('/course/{slug}','Api\CourseAPIController@show');
+
+Route::get('/course',function(){
+    return \App\Course::all();
+});
+
+
+
 Route::post('/cap-nhat-khoa-hoc','CourseController@updateApi');
 
